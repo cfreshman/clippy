@@ -4,8 +4,8 @@
 }
 
 .outer.container {
-	width: 90%;
-	max-width: 1000px;
+	/*width: 90%;*/
+	/*max-width: 1000px;*/
 }
 
 .search-box {
@@ -70,9 +70,11 @@
 	margin-top: 1rem ;
 }
 
-#group-list .list-group-item.active {
+#group-list .list-group-item.active,
+.navbar .dropdown-item:active {
 	outline: 0;
-	background: #343a40 !important
+	background: #343a40 !important;
+	border-color: #1d2124!important;
 }
 
 #group-list .btn {
