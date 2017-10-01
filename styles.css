@@ -1,0 +1,111 @@
+.navbar {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.outer.container {
+	width: 90%;
+	max-width: 1000px;
+}
+
+.search-box {
+	position: relative;
+}
+
+.search-icon {
+	background-image: url(icons/search.svg);
+	background-position: right;
+	background-origin: content-box;
+	background-repeat: no-repeat;
+	position: absolute;
+	margin-right: .5rem;
+	width: 1.75rem;
+	padding-right: .6rem;
+	height: 100%;
+	right: 0;
+	bottom: 0;
+	cursor: pointer;
+}
+
+.profile-icon {
+	background-image: url(icons/profile.svg) !important;
+	outline: none !important;
+	box-shadow: none !important;
+	background-color: white !important;
+	border-color: white !important;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 35px;
+	height: 35px;
+	border-width: 5px;
+	border-radius: .25rem;
+	cursor: pointer;
+}
+
+.dropdown-menu-right {
+	left: initial;
+	right: 0;
+}
+
+.profile-icon::after {
+	display: none;
+}
+
+#upcoming .card-slide {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	overflow: auto;
+}
+
+#upcoming .card {
+	flex-shrink: 0;
+	width: 12rem;
+	height: 10rem;
+	margin-right: 1rem;
+	margin-top: 0;
+}
+
+.card, .list-group {
+	margin-top: 1rem ;
+}
+
+#group-list .list-group-item.active {
+	outline: 0;
+	background: #343a40 !important
+}
+
+#group-list .btn {
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+	border-radius: 0;
+	text-align: left;
+}
+
+#event-feed .event.card .card-img-top {
+	max-height: 10rem;
+	object-fit: cover;
+}
+
+#event-feed .event.card .card-body {
+	display: flex;
+	flex-direction: row;
+}
+
+#event-feed .card-aside {
+	padding-right: 1rem;
+	display: flex;
+	flex-direction: column;
+}
+
+#event-feed .card-aside .btn {
+	margin-bottom: .25rem;
+}
+
+#event-feed .card-content {
+
+}
+
+content > .outer.container {
+	margin-bottom: 3rem;
+}
