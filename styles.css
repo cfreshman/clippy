@@ -1,11 +1,6 @@
-.navbar {
+#header {
 	padding-left: 0;
 	padding-right: 0;
-}
-
-.outer.container {
-	/*width: 90%;*/
-	/*max-width: 1000px;*/
 }
 
 .search-box {
@@ -51,23 +46,9 @@
 	display: none;
 }
 
-#upcoming .card-slide {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	overflow: auto;
-}
-
-#upcoming .card {
-	flex-shrink: 0;
-	width: 12rem;
-	height: 10rem;
-	margin-right: 1rem;
-	margin-top: 0;
-}
-
-.card, .list-group {
-	margin-top: 1rem ;
+#group-list {
+	position: sticky;
+	top: 4.5rem;
 }
 
 #group-list .list-group-item.active,
@@ -82,6 +63,25 @@
 	padding-right: 1.25rem;
 	border-radius: 0;
 	text-align: left;
+}
+
+#upcoming .card-slide {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	overflow: auto;
+}
+
+#upcoming .card {
+	flex-shrink: 0;
+	/*width: 12rem;
+	height: 10rem;*/
+	margin-right: 1rem;
+	margin-top: 0;
+}
+
+.card, .list-group {
+	margin-top: 1rem ;
 }
 
 #event-feed .event.card .card-img-top {
@@ -104,10 +104,6 @@
 	margin-bottom: .25rem;
 }
 
-#event-feed .card-content {
-
-}
-
-content > .outer.container {
+content {
 	margin-bottom: 3rem;
 }
