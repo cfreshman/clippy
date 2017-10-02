@@ -107,3 +107,8 @@
 content {
 	margin-bottom: 3rem;
 }
+
+.img-thumbnail {
+	width: 10rem;
+	margin: 0.5rem;
+} 
