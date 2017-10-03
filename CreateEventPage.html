@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Grouper</title>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+  <!-- Bootstrap-inputfile -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <nav class="navbar sticky-top navbar-dark bg-dark" id="header">
+    <div class="container">
+      <a class="navbar-brand" href="#">Grouper</a>
+
+      <div class="form-inline">
+        <!-- Search Box -->
+        <form class="search-box form-inline">
+          <input class="search-input form-control mr-sm-2" type="text" placeholder="Search">
+          <span class="search-icon"></span>
+        </form>
+
+        <!-- Account Icon -->
+        <div class="dropdown">
+          <button type="button" class="profile-icon btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">Profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Create Event</a>
+            <a class="dropdown-item" href="#">Create Group</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Account Settings</a>
+            <a class="dropdown-item" href="#">Log out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <aside class="col-3">
+        <div id="group-list">
+
+          <!-- Create Event -->
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Create Event</a>
+          </div>
+
+          <!-- Group List -->
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home Feed</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Group Name</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Group Name</a>
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Group Name</a>
+            <a class="list-group-item list-group-item-action list-group-item-secondary" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Create Group</a>
+          </div>
+        </div>
+      </aside>
+
+      <content class="col-9">
+
+      <!-- Create Event -->
+        <div class="event card">
+          <h4 class="card-header">Create a new event</h4>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label>Event Name:</label>
+                <input class="form-control" placeholder="Enter a name for the event">
+              </div>
+              <div class="form-group">
+                <label>Description:</label>
+                <input class="form-control" placeholder="Tell us about the event...">
+              </div>
+              <div class="form-group">
+                <label>Location:</label>
+                <input class="form-control" placeholder="Enter the location of the event">
+              </div>
+              <div class="form-group">
+                <label>Time:</label>
+                <input class="form-control" placeholder="MM/DD/YYYY HH:MM AM/PM">
+              </div>
+              <div class="form-group">
+                <label>Add images:</label>
+                <div class="form-group">
+                  <div class="file-loading">
+                    <label>Preview File Icon</label>
+                    <input id="input-image" type="file" multiple>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-dark">Create</button>
+            </form>
+          </div>
+        </div>
+      </content>
+    </div>
+  </div>
+
+  <!-- jQuery, Bootstrap js -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap-inputfile -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- piexif.min.js is only needed for restoring exif data in resized images and when you 
+      wish to resize images before upload. This must be loaded before fileinput.min.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/piexif.min.js" type="text/javascript"></script>
+  <!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview. 
+      This must be loaded before fileinput.min.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/sortable.min.js" type="text/javascript"></script>
+  <!-- purify.min.js is only needed if you wish to purify HTML content in your preview for 
+      HTML files. This must be loaded before fileinput.min.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/purify.min.js" type="text/javascript"></script>
+  <!-- popper.min.js below is needed if you use bootstrap 4.x. You can also use the bootstrap js 
+     3.3.x versions without popper.min.js. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <!-- bootstrap.min.js below is needed if you wish to zoom and preview file content in a detail modal
+      dialog. bootstrap 4.x is supported. You can also use the bootstrap js 3.3.x versions. -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" type="text/javascript"></script>
+  <!-- the main fileinput plugin file -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/fileinput.min.js"></script>
+  <script>
+    $("#input-image").fileinput({
+        theme: 'fa',
+        showUpload: false,
+        showCaption: false,
+        browseClass: "btn btn-primary btn-lg",
+        fileType: "any",
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        overwriteInitial: false,
+        initialPreviewAsData: true,
+        initialPreview: [
+            "images/image-placeholder.png",
+            "images/image-placeholder.png",
+            "images/image-placeholder.png"
+        ],
+        initialPreviewConfig: [
+            {caption: "sample-image.png", size: 329892, width: "120px", url: "{$url}", key: 1},
+            {caption: "sample-image.png", size: 872378, width: "120px", url: "{$url}", key: 2},
+            {caption: "sample-image.png", size: 632762, width: "120px", url: "{$url}", key: 3}
+        ]
+    });
+    </script>
+</body>
+</html>
