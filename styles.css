@@ -85,7 +85,7 @@
 }
 
 .card, .list-group {
-	margin-top: 1rem ;
+	margin-top: 1.5rem ;
 }
 
 .text-large {
@@ -110,6 +110,10 @@
 
 #event-feed .card-aside .btn {
 	margin-bottom: .25rem;
+}
+
+#event-feed .card-footer.list-group {
+	padding-left: 1.25rem;
 }
 
 content {
