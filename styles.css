@@ -46,6 +46,10 @@
 	display: none;
 }
 
+.list-group-small {
+	width: 30%;
+}
+
 #group-list {
 	position: sticky;
 	top: 4.5rem;
@@ -82,6 +86,10 @@
 
 .card, .list-group {
 	margin-top: 1rem ;
+}
+
+.text-large {
+	width: 100%;
 }
 
 #event-feed .event.card .card-img-top {
