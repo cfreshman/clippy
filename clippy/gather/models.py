@@ -1,4 +1,5 @@
 from django.db import models
+from djangp.urls import reverse
 
 # Create your models here.
 class User (models.Model):
