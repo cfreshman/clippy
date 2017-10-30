@@ -1,0 +1,106 @@
+{% extends "base_generic.html" %}
+{% block title %}<title>Account Settings</title>{% endblock %}
+{% block content %}
+  <div class="row">
+      <aside class="col-3">
+        <div id="group-list">
+
+          <!-- Create Event -->
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Create Event</a>
+          </div>
+
+          <!-- Group List -->
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home Feed</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Group Name</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Group Name</a>
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Group Name</a>
+            <a class="list-group-item list-group-item-action list-group-item-secondary" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Create Group</a>
+          </div>
+        </div>
+      </aside>
+
+    <content class="col-9">
+
+
+          <div class="title-header">
+            <h1>Account Settings</h1>
+          </div>
+
+        <!-- Settings nav -->
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Privacy</a>
+            </li>
+          </ul>
+
+        <!-- Profile Pic Card -->
+          <div class="card">
+            <h3 class="card-header">Profile Picture</h3>
+            <div class="card-body">
+              <div class="input-group">
+                <div class="form-group">
+                  <img class="img-thumbnail" src="icons/profile.svg">
+                  <br>
+                  <label for="exampleInputFile">File input</label>
+                  <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                  <br>
+                  <a href="#" class="btn btn-light">Change Profile Picture</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- Name Card -->
+          <div class="card">
+            <h3 class="card-header">Name</h3>
+            <div class="card-body">
+              <div class="input-group">
+                <span class="input-group-addon" id="name-addon">First Name</span>
+                <input type="text" class="form-control" placeholder="John" aria-describedby="fname-input">
+              </div>
+              <br>
+              <div class="input-group">
+                <span class="input-group-addon" id="name-addon">Last Name</span>
+                <input type="text" class="form-control" placeholder="Doe" aria-describedby="lname-input">
+              </div>
+            </div>
+          </div>
+
+      <!-- Username Card -->
+        <div class="card">
+          <h3 class="card-header">Username</h3>
+          <div class="card-body">
+            <div class="card-text">How you appear to others</div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon" id="fname-addon">@</span>
+              <input type="text" class="form-control" placeholder="JDoe4815162342" aria-describedby="fname-input">
+            </div>
+          </div>
+        </div>
+
+      <!-- Password Card -->
+        <div class="card">
+          <h3 class="card-header">Password</h3>
+          <div class="card-body">
+            <div class="input-group">
+              <span class="input-group-addon" id="pass-addon">Password</span>
+              <input type="text" class="form-control" placeholder="" aria-describedby="pass-input">
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon" id="pass-addon">Confirm</span>
+              <input type="text" class="form-control" aria-describedby="pass-confirm-input">
+            </div>
+            <br>
+            <div class="btn btn-light">Change Password</a>
+          </div>
+        </div>
+    </content>
+  </div>
+{% endblock %}
