@@ -7,19 +7,19 @@
       {% block page-info %}{% endblock %}
 
       <!-- Create Event -->
-      <div class="list-group" id="list-tab" role="tablist">
-        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Create Event</a>
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action active" href="{% url 'event' %}">Create Event</a>
       </div>
 
       <!-- Group List -->
-      <div class="list-group" id="list-tab" role="tablist">
-        <a class="list-group-item list-group-item-action {% if group_id == 0 %}active{% endif %}" id="list-home-list" href="{% url 'index' %}">Home Feed</a>
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action {% if group_id == 0 %}active{% endif %}" href="{% url 'index' %}">Home Feed</a>
         {% if group_list %}
           {% for group in group_list %}
-            <a class="list-group-item list-group-item-action {% if group_id == group.id %}active{% endif %}" id="list-settings-list" href="{% url 'group' group.id %}">{{ group.name }}</a>
+            <a class="list-group-item list-group-item-action {% if group_id == group.id %}active{% endif %}" href="{% url 'group' group.id %}">{{ group.name }}</a>
           {% endfor %}
         {% endif %}
-        <a class="list-group-item list-group-item-action list-group-item-secondary" id="list-settings-list" href="#list-settings">Create Group</a>
+        <a class="list-group-item list-group-item-action list-group-item-secondary" href="{% url 'manager' %}">Create Group</a>
       </div>
 
       {% block slide-down %}{% endblock %}
