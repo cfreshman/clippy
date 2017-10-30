@@ -15,9 +15,9 @@ class User(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=200, help_text="Enter a name for the group")
-    description = models.TextField(max_length=1000, help_text="Enter a bried description of the group")
+    description = models.TextField(max_length=1000, blank=True, null=True, help_text="Enter a bried description of the group")
     members = models.ManyToManyField(User, related_name="groups", help_text="Select members for this group")
-    picture = models.ImageField(upload_to="images/group/")
+    picture = models.ImageField(upload_to="images/group/", blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -27,13 +27,13 @@ class Group(models.Model):
 
 class Event(models.Model):
     title = models.CharField(max_length=50, help_text="Event Name")
-    location = models.CharField(max_length=100, help_text="Location")
-    description = models.TextField(max_length=1000, help_text="Enter a brief description of the Event")
+    location = models.CharField(max_length=100, blank=True, null=True, help_text="Location")
+    description = models.TextField(max_length=1000, blank=True, null=True, help_text="Enter a brief description of the Event")
     hosts = models.ManyToManyField(User, related_name="hosting", help_text="These users are hosting the Event")
     groups = models.ManyToManyField(Group, blank=True, related_name="events", help_text="Groups this user is associated with")
     invited = models.ManyToManyField(User, blank=True, related_name="invited", help_text="These users are invited to the event")
     joined = models.ManyToManyField(User, blank=True, related_name="joined", help_text="These users have joined the Event")
-    picture = models.ImageField(upload_to='images/event/')
+    picture = models.ImageField(upload_to='images/event/', blank=True, null=True)
 
     def __str__(self):
         return self.title
