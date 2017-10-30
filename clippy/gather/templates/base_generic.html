@@ -30,10 +30,10 @@
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="#">Profile</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Create Event</a>
-            <a class="dropdown-item" href="#">Create Group</a>
+            <a class="dropdown-item" href="{% url 'event' %}">Create Event</a>
+            <a class="dropdown-item" href="{% url 'manager' %}">Create Group</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Account Settings</a>
+            <a class="dropdown-item" href="{% url 'settings' %}">Account Settings</a>
             <a class="dropdown-item" href="#">Log out</a>
           </div>
         </div>
