@@ -43,6 +43,10 @@
 	right: 0;
 }
 
+#header .dropdown-header {
+	cursor: default;
+}
+
 .profile-icon::after {
 	display: none;
 }
