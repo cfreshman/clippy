@@ -1,5 +1,29 @@
 {% extends "base_feed.html" %}
 
-{% block title %}<title>Group {{ group_id }}</title>{% endblock %}
+{% block title %}<title>{{ group }}</title>{% endblock %}
 
 {% block content %}{{ block.super }}{% endblock %}
+
+{% block page-info %}
+	<div class="card">
+		<img class="card-img-top" src="{{ group.picture.url }}" alt="{{ group }}">
+		<div class="card-body">
+			<h4 class="card-title">{{ group }}</h4>
+			<p class="card-text">{{ group.description }}</p>
+		</div>
+	</div>
+{% endblock %}
+
+{% block slide-down %}
+  <!-- Members -->
+	<div class="card" id="slide-down">
+	  <h4 class="card-header">Members</h4>
+    <div class="card-slide">
+    	<div class="list-group" id="list-tab" role="tablist">
+    		{% for user in members %}
+	      	<a class="list-group-item list-group-item-action" id="list-settings-list" href="{% url 'user' user.id %}">{{ user }}</a>
+	      {% endfor %}
+    	</div>
+    </div>
+	</div>
+{% endblock %}

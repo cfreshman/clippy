@@ -1,3 +1,25 @@
 {% extends "base_feed.html" %}
 
 {% block content %}{{ block.super }}{% endblock %}
+
+{% block slide %}
+  <!-- Upcoming Events -->
+  {% if upcoming %}
+    <div class="event card" id="slide">
+      <h4 class="card-header">Upcoming</h4>
+      <div class="card-body">
+        <div class="card-slide">
+          {% for event in upcoming %}
+            <div class="event card">
+              <div class="card-header">6 Hours</div>
+              <div class="card-body">
+                <h5 class="card-title">{{ event.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ event.location }}</h6>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^gather/', include('gather.urls')),
     url(r'^$', RedirectView.as_view(url='/gather/', permanent=True)),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -16,65 +16,41 @@
         <a class="list-group-item list-group-item-action {% if group_id == 0 %}active{% endif %}" id="list-home-list" href="{% url 'index' %}">Home Feed</a>
         {% if group_list %}
           {% for group in group_list %}
-            <a class="list-group-item list-group-item-action {% if group_id == group.id %}active{% endif %}" id="list-settings-list" href="{% url 'group' group.id %}">Group {{ group.id }}</a>
+            <a class="list-group-item list-group-item-action {% if group_id == group.id %}active{% endif %}" id="list-settings-list" href="{% url 'group' group.id %}">{{ group.name }}</a>
           {% endfor %}
         {% endif %}
         <a class="list-group-item list-group-item-action list-group-item-secondary" id="list-settings-list" href="#list-settings">Create Group</a>
       </div>
+
+      {% block slide-down %}{% endblock %}
     </div>
   </aside>
 
   <content class="col-9">
 
-    <!-- Upcoming Events -->
-    {% if slide_list %}
-      <div class="event card" id="upcoming">
-        <h4 class="card-header">{{ slide_title }}</h4>
-        <div class="card-body">
-          <div class="card-slide">
-            {% for event in slide_list %}
-              <div class="event card">
-                <div class="card-header">6 Hours</div>
-                <div class="card-body">
-                  <h5 class="card-title">Event Name</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Host Name</h6>
-                </div>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    {% endif %}
+    {% block slide %}{% endblock %}
 
     <!-- Event Feed -->
     <div id="event-feed">
       {% if event_list %}
         {% for event in event_list %}
         <div class="event card">
-          <img class="card-img-top" src="images/L1.png">
+          <img class="card-img-top" src="{{ event.picture.url }}">
           <div class="card-body">
             <div class="card-aside">
               <a href="#" class="btn btn-dark">Join</a>
               <a href="#" class="btn btn-light">Hide</a>
             </div>
             <div class="card-content">
-              <h4 class="card-title">Event Name</h4>
-              <h6 class="card-subtitle mb-2 text-muted">MM/DD/YYYY • Host Name</h6>
-              <p class="card-text">Here is some info about the event</p>
+              <h4 class="card-title">{{ event.title }}</h4>
+              <h6 class="card-subtitle mb-2 text-muted">MM/DD/YYYY</h6>
+              <p class="card-text">{{ event.description }}</p>
             </div>
           </div>
-          <ul class="list-group card-footer">
-            <li class="list-group-item">This is a comment</li>
-            <li class="list-group-item">
-              <input type="text" class="form-control" placeholder="Add a comment">
-            </li>
-          </ul>
         </div>
-
-        <!-- <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}}) -->
         {% endfor %}
       {% else %}
-        <p>No upcoming events</p>
+        <p class="spaced">No upcoming events</p>
       {% endif %}
     </div>
   </content>

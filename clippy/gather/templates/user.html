@@ -1,3 +1,36 @@
 {% extends "base_feed.html" %}
 
+{% block title %}<title>{{ user }}</title>{% endblock %}
+
 {% block content %}{{ block.super }}{% endblock %}
+
+{% block page-info %}
+	<div class="card">
+		<img class="card-img-top" src="{{ user.picture.url }}" alt="{{ user }}">
+		<div class="card-body">
+			<h4 class="card-title">{{ user }}</h4>
+		</div>
+	</div>
+{% endblock %}
+
+{% block slide %}
+  <!-- Upcoming Events -->
+  {% if upcoming %}
+    <div class="event card" id="slide">
+      <h4 class="card-header">Upcoming</h4>
+      <div class="card-body">
+        <div class="card-slide">
+          {% for event in upcoming %}
+            <div class="event card">
+              <div class="card-header">6 Hours</div>
+              <div class="card-body">
+                <h5 class="card-title">{{ event.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ event.location }}</h6>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
