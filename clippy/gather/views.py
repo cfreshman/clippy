@@ -57,3 +57,21 @@ def group(request, id):
         		 'event_list': events,
         		 'members': members},
     )
+
+def event(request):
+    return render(
+        request,
+        'event.html',
+    )
+
+def manager(request):
+    return render(
+        request,
+        'manager.html',
+    )
+
+def settings(request):
+    return render(
+        request,
+        'settings.html'
+    )
