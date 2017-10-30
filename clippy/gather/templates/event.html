@@ -1,0 +1,62 @@
+{% extends "base_generic.html" %}
+{% block title %}<title>Create Event</title>{% endblock %}
+{% block content %}
+    <div class="row">
+      <aside class="col-3">
+        <div id="group-list">
+
+          <!-- Create Event -->
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Create Event</a>
+          </div>
+
+          <!-- Group List -->
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home Feed</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Group Name</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Group Name</a>
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Group Name</a>
+            <a class="list-group-item list-group-item-action list-group-item-secondary" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Create Group</a>
+          </div>
+        </div>
+      </aside>
+
+      <content class="col-9">
+
+      <!-- Create Event -->
+        <div class="event card">
+          <h4 class="card-header">Create a new event</h4>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label>Event Name:</label>
+                <input class="form-control" placeholder="Enter a name for the event">
+              </div>
+              <div class="form-group">
+                <label>Description:</label>
+                <input class="form-control" placeholder="Tell us about the event...">
+              </div>
+              <div class="form-group">
+                <label>Location:</label>
+                <input class="form-control" placeholder="Enter the location of the event">
+              </div>
+              <div class="form-group">
+                <label>Time:</label>
+                <input class="form-control" placeholder="MM/DD/YYYY HH:MM AM/PM">
+              </div>
+              <div class="form-group">
+                <label>Add images:</label>
+                <div class="form-group">
+                  <div class="file-loading">
+                    <label>Preview File Icon</label>
+                    <input id="input-image" type="file" multiple>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-dark">Create</button>
+            </form>
+          </div>
+        </div>
+      </content>
+    </div>
+{% endblock %}
