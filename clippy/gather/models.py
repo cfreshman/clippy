@@ -28,6 +28,7 @@ class Group(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=50, help_text="Event Name")
     location = models.CharField(max_length=100, blank=True, null=True, help_text="Location")
+    time = models.DateTimeField(help_text="Enter a time for the event")
     description = models.TextField(max_length=1000, blank=True, null=True, help_text="Enter a brief description of the Event")
     hosts = models.ManyToManyField(User, related_name="hosting", help_text="These users are hosting the Event")
     groups = models.ManyToManyField(Group, blank=True, related_name="events", help_text="Groups this user is associated with")
