@@ -5,7 +5,7 @@
 {% block content %}{{ block.super }}{% endblock %}
 
 {% block page-info %}
-	<div class="card">
+	<div class="page-info card spaced">
 		<img class="card-img-top" src="{{ user.picture.url }}" alt="{{ user }}">
 		<div class="card-body">
 			<h4 class="card-title">{{ user }}</h4>
@@ -16,7 +16,7 @@
 {% block slide %}
   <!-- Upcoming Events -->
   {% if upcoming %}
-    <div class="event card" id="slide">
+    <div class="card spaced" id="slide">
       <h4 class="card-header">Upcoming</h4>
       <div class="card-body">
         <div class="card-slide">

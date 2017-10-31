@@ -105,8 +105,9 @@
 	margin-top: 0;
 }
 
-.card, .list-group, .spaced {
+.spaced {
 	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
 }
 
 .text-large {
@@ -144,4 +145,28 @@ content {
 .img-thumbnail {
 	width: 10rem;
 	margin: 0.5rem;
-} 
+}
+
+.btn-light {
+	border-color: #e2e6ea;
+}
+
+.page-info .card-img-top {
+	min-width: 100%;
+	height: auto;
+	/*object-fit: cover;*/
+}
+
+.member-icon {
+	background-image: url(../icons/profile.svg);
+	background-color: white;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	width: 5rem;
+	height: 5rem;
+	margin: .5rem;
+	border-radius: .25rem;
+	object-fit: cover;
+	cursor: pointer;
+}

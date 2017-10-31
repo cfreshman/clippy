@@ -6,7 +6,7 @@
   </div>
 
   <!-- Profile Pic Card -->
-  <div class="card">
+  <div class="card spaced">
     <h3 class="card-header">Profile Picture</h3>
     <div class="card-body">
       <div class="input-group">
@@ -23,36 +23,37 @@
   </div>
 
   <!-- Name Card -->
-    <div class="card">
+    <div class="card spaced">
       <h3 class="card-header">Name</h3>
       <div class="card-body">
         <div class="input-group">
           <span class="input-group-addon" id="name-addon">First Name</span>
-          <input type="text" class="form-control" placeholder="John" aria-describedby="fname-input">
+          <input type="text" class="form-control" value="{{ viewer.first_name }}" placeholder="{{ viewer.first_name }}" aria-describedby="fname-input">
         </div>
         <br>
         <div class="input-group">
           <span class="input-group-addon" id="name-addon">Last Name</span>
-          <input type="text" class="form-control" placeholder="Doe" aria-describedby="lname-input">
+          <input type="text" class="form-control" value="{{ viewer.last_name }}" placeholder="{{ viewer.last_name }}" aria-describedby="lname-input">
         </div>
       </div>
     </div>
 
   <!-- Username Card -->
-  <div class="card">
+  <!-- Will figure out with login/logout -->
+  <div class="card spaced">
     <h3 class="card-header">Username</h3>
     <div class="card-body">
-      <div class="card-text">How you appear to others</div>
-      <br>
+      <!-- <div class="card-text">How you appear to others</div>
+      <br> -->
       <div class="input-group">
         <span class="input-group-addon" id="fname-addon">@</span>
-        <input type="text" class="form-control" placeholder="JDoe4815162342" aria-describedby="fname-input">
+        <input type="text" class="form-control" placeholder="Will depend on login/logout" aria-describedby="fname-input">
       </div>
     </div>
   </div>
 
   <!-- Password Card -->
-  <div class="card">
+  <div class="card spaced">
     <h3 class="card-header">Password</h3>
     <div class="card-body">
       <div class="input-group">

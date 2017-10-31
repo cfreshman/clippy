@@ -7,6 +7,9 @@ class User(models.Model):
     friends = models.ManyToManyField('self', blank=True, help_text="Friends of this user")
     picture = models.ImageField(upload_to='images/user/', default='images/user/placeholder.png')
 
+    class Meta: 
+        ordering = ["last_name"]
+
     def __str__(self):
         return self.first_name + " " + self.last_name
 
@@ -18,6 +21,9 @@ class Group(models.Model):
     description = models.TextField(max_length=1000, blank=True, null=True, help_text="Enter a bried description of the group")
     members = models.ManyToManyField(User, related_name="groups", help_text="Select members for this group")
     picture = models.ImageField(upload_to="images/group/", blank=True, null=True)
+
+    class Meta: 
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
@@ -35,6 +41,9 @@ class Event(models.Model):
     invited = models.ManyToManyField(User, blank=True, related_name="invited", help_text="These users are invited to the event")
     joined = models.ManyToManyField(User, blank=True, related_name="joined", help_text="These users have joined the Event")
     picture = models.ImageField(upload_to='images/event/', blank=True, null=True)
+
+    class Meta: 
+        ordering = ["time"]
 
     def __str__(self):
         return self.title

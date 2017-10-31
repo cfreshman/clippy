@@ -11,8 +11,9 @@ def index(request):
 
     viewer = User.objects.get(id=user_id)
     group_list = viewer.groups.all()
-    invited = viewer.invited.all()
-    upcoming = viewer.joined.all()
+    hosting = viewer.hosting.distinct()
+    invited = hosting | viewer.invited.distinct()
+    upcoming = hosting | viewer.joined.distinct()
 
     # Render the HTML template index.html with the data in the context variable
     return render(
@@ -29,11 +30,12 @@ def user(request, id):
         return index(request)
 
     viewer = User.objects.get(id=user_id)
+    group_list = viewer.groups.all()
 
     user_obj = User.objects.get(id=id)
-    group_list = user_obj.groups.all()
-    invited = user_obj.invited.all()
-    upcoming = user_obj.joined.all()
+    hosting = user_obj.hosting.distinct()
+    invited = hosting | user_obj.invited.distinct()
+    upcoming = hosting | user_obj.joined.distinct()
 
     return render(
         request,
