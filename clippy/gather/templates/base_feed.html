@@ -56,3 +56,11 @@
   </content>
 </div>
 {% endblock %}
+
+{% block script %}
+  <script>
+    $(window).resize(() => {
+      $(".page-info img").height($(".page-info img").width())
+    }).resize();
+  </script>
+{% endblock %}

@@ -27,7 +27,7 @@
 	outline: none !important;
 	box-shadow: none !important;
 	background-color: white !important;
-	border-color: white !important;
+	border-color: #e2e6ea !important;
 	background-position: center;
 	background-repeat: no-repeat;
 	width: 35px;
@@ -151,13 +151,14 @@ content {
 	border-color: #e2e6ea;
 }
 
-.page-info .card-img-top {
-	min-width: 100%;
-	height: auto;
-	/*object-fit: cover;*/
+.card-img-top {
+	object-fit: cover;
 }
 
 .member-icon {
+	margin: .5rem;
+}
+.member-icon img {
 	background-image: url(../icons/profile.svg);
 	background-color: white;
 	background-position: center;
@@ -165,7 +166,6 @@ content {
 
 	width: 5rem;
 	height: 5rem;
-	margin: .5rem;
 	border-radius: .25rem;
 	object-fit: cover;
 	cursor: pointer;

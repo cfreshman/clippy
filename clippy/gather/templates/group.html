@@ -22,15 +22,10 @@
 	  <h4 class="card-header">Members</h4>
     <div class="card-slide">
     	{% for user in members %}
-    		<a href="{% url 'user' user.id %}">
-    			<img class="member-icon" src="{{ user.picture.url }}" title="{{ user }}">
+    		<a class="member-icon" href="{% url 'user' user.id %}">
+    			<img src="{{ user.picture.url }}" title="{{ user }}">
     		</a>
       {% endfor %}
-    	<!-- <div class="list-group">
-    		{% for user in members %}
-	      	<a class="list-group-item list-group-item-action" href="{% url 'user' user.id %}">{{ user }}</a>
-	      {% endfor %}
-    	</div> -->
     </div>
 	</div>
 {% endblock %}
