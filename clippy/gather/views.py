@@ -74,11 +74,13 @@ def event(request):
 
 def manager(request):
     viewer = User.objects.get(id=user_id)
+    group_list = viewer.groups.all()
 
     return render(
         request,
         'manager.html',
-        context={'viewer': viewer}
+        context={'viewer': viewer,
+                 'group_list': group_list, 'group_id': -1,}
     )
 
 def settings(request):

@@ -40,10 +40,11 @@
           <div class="card-body">
             <div id="group-list">
             <div class="list-group" id="list-tab" role="tablist">
-              <a class="list-group-item list-group-item-action list-group-small" data-toggle="list" href="#" role="tab">Group 1</a>
-              <a class="list-group-item list-group-item-action list-group-small" data-toggle="list" href="#" role="tab">Group 2</a>
-              <a class="list-group-item list-group-item-action list-group-small" data-toggle="list" href="#" role="tab">Group 3</a>
-              <a class="list-group-item list-group-item-action list-group-small" data-toggle="list" href="#" role="tab">Group 4</a>
+            {% if group_list %}
+          		{% for group in group_list %}
+              <a class="list-group-item list-group-item-action list-group-small {% if group_id == group.id %}active{% endif %}" href="#">{{ group.name }}</a>
+            	{% endfor %}
+        	{% endif %}
             </div>
             </div>
           </div>
