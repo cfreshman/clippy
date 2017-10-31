@@ -11,9 +11,9 @@
     <div class="card-body">
       <div class="input-group">
         <div class="form-group">
-          <img class="img-thumbnail" src="icons/profile.svg">
+          {% load static %}
+          <img class="img-thumbnail" src="{{ viewer.picture.url }}">
           <br>
-          <label for="exampleInputFile">File input</label>
           <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
           <br>
           <a href="#" class="btn btn-light">Change Profile Picture</a>
