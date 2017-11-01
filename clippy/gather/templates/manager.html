@@ -38,14 +38,10 @@
         </div>
         <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
           <div class="card-body">
-            <div id="group-list">
             <div class="list-group" id="list-tab" role="tablist">
-            {% if group_list %}
           		{% for group in group_list %}
-              <a class="list-group-item list-group-item-action list-group-small {% if group_id == group.id %}active{% endif %}" href="#">{{ group.name }}</a>
+                <a class="list-group-item list-group-item-action list-group-small {% if group_id == group.id %}active{% endif %}" href="#">{{ group.name }}</a>
             	{% endfor %}
-        	{% endif %}
-            </div>
             </div>
           </div>
         </div>

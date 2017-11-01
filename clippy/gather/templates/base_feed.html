@@ -14,11 +14,9 @@
       <!-- Group List -->
       <div class="list-group spaced">
         <a class="list-group-item list-group-item-action {% if group_id == 0 %}active{% endif %}" href="{% url 'index' %}">Home Feed</a>
-        {% if group_list %}
-          {% for group in group_list %}
-            <a class="list-group-item list-group-item-action {% if group_id == group.id %}active{% endif %}" href="{% url 'group' group.id %}">{{ group.name }}</a>
-          {% endfor %}
-        {% endif %}
+        {% for group in group_list %}
+          <a class="list-group-item list-group-item-action {% if group_id == group.id %}active{% endif %}" href="{% url 'group' group.id %}">{{ group.name }}</a>
+        {% endfor %}
         <a class="list-group-item list-group-item-action list-group-item-secondary" href="{% url 'manager' %}">Create Group</a>
       </div>
     </div>
