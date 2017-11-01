@@ -52,7 +52,7 @@ def group(request, id):
     group_list = viewer.groups.all()
 
     group_obj = Group.objects.get(id=id)
-    members = group_obj.members.all()
+    members = group_obj.members.exclude(id=user_id)
     events = group_obj.events.all()
 
     return render(
