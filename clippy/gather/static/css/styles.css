@@ -83,25 +83,7 @@
 
 #slide .card {
 	flex-shrink: 0;
-	/*width: 14rem;
-	height: 9rem;*/
 	margin-right: 1rem;
-	margin-top: 0;
-}
-
-#slide-down .card-slide {
-	height: 20rem;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	overflow: auto;
-}
-
-#slide-down .card {
-	flex-shrink: 0;
-}
-
-#slide-down .list-group {
 	margin-top: 0;
 }
 
@@ -130,16 +112,12 @@
 	flex-direction: column;
 }
 
-#event-feed .card-aside .btn {
+#event-feed .card-aside .btn:not(:last-child) {
 	margin-bottom: .25rem;
 }
 
 #event-feed .card-footer.list-group {
 	padding-left: 1.25rem;
-}
-
-content {
-	margin-bottom: 3rem;
 }
 
 .img-thumbnail {
@@ -156,7 +134,7 @@ content {
 }
 
 .member-icon {
-	margin: .5rem;
+	padding: .5rem;
 }
 .member-icon img {
 	background-image: url(../icons/profile.svg);

@@ -22,9 +22,11 @@
 	  <h4 class="card-header">Members</h4>
     <div class="card-slide">
     	{% for user in members %}
-    		<a class="member-icon" href="{% url 'user' user.id %}">
-    			<img src="{{ user.picture.url }}" title="{{ user }}">
-    		</a>
+    		<div class="member-icon">
+    			<a href="{% url 'user' user.id %}">
+    				<img src="{{ user.picture.url }}" title="{{ user }}">
+    			</a>
+    		</div>
       {% endfor %}
     </div>
 	</div>
