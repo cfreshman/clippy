@@ -1,7 +1,5 @@
 {% extends "base_feed.html" %}
 
-{% block content %}{{ block.super }}{% endblock %}
-
 {% block slide %}
   <!-- Upcoming Events -->
   {% if upcoming %}
@@ -13,7 +11,7 @@
             <div class="event card">
               <div class="card-body">
                 <h5 class="card-title">{{ event.title }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ event.location }}</h6>
+                <h6 class="card-subtitle text-muted">{{ event.location }}</h6>
               </div>
               <div class="card-footer">{{ event.time }}</div>
             </div>

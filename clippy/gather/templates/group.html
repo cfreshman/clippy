@@ -2,12 +2,10 @@
 
 {% block title %}<title>{{ group }}</title>{% endblock %}
 
-{% block content %}{{ block.super }}{% endblock %}
-
 {% block page-info %}
 	<div class="page-info card spaced">
 		{% if group.picture %}
-		<img class="card-img-top" src="{{ group.picture.url }}" alt="{{ group }}">
+			<img class="card-img-top" src="{{ group.picture.url }}" alt="{{ group }}">
 		{% endif %}
 		<div class="card-body">
 			<h4 class="card-title">{{ group }}</h4>
