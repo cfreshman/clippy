@@ -59,6 +59,7 @@
 
 {% block script %}
   <script>
+    // this resizes the page's picture to a square if it exists
     $(window).resize(() => {
       $(".page-info img").height($(".page-info img").width())
     }).resize();
