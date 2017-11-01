@@ -12,16 +12,21 @@
         </div>
         <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="card-body">
-            <label>Group Name</label>
+            <label>Name</label>
             <input type="text" class="form-control" placeholder="Enter group name">
             <br>
-            <label>Group Description</label>
-            <textarea class="text-large" rows="5"></textarea>
-            <br><br>
-            <label>Group Logo</label>
-            <button>Upload Picture</button>
-            <br><br>
-            <label>Invite Members</label>
+            <label>Description</label>
+            <textarea class="form-control" rows="5"></textarea>
+            <br>
+            <label>Picture</label>
+            <div>
+              <label class="custom-file">
+                <input type="file" id="file" class="custom-file-input">
+                <span class="custom-file-control"></span>
+              </label>
+            </div>
+            <br>
+            <label>Members</label>
             <input type="text" class="form-control" placeholder="Enter names to invite">
             <br><br>
             <button type="button" class="btn btn-dark">Create</button>
