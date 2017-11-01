@@ -16,16 +16,18 @@
 
 {% block slide %}
   <!-- Members -->
-	<div class="card spaced" id="slide">
-	  <h4 class="card-header">Members</h4>
-    <div class="card-slide">
-    	{% for user in members %}
-    		<div class="member-icon">
-    			<a href="{% url 'user' user.id %}">
-    				<img src="{{ user.picture.url }}" title="{{ user }}">
-    			</a>
-    		</div>
-      {% endfor %}
-    </div>
-	</div>
+  {% if members %}
+		<div class="card spaced" id="slide">
+		  <h4 class="card-header">Members</h4>
+	    <div class="card-slide">
+	    	{% for user in members %}
+	    		<div class="member-icon">
+	    			<a href="{% url 'user' user.id %}">
+	    				<img src="{{ user.picture.url }}" title="{{ user }}">
+	    			</a>
+	    		</div>
+	      {% endfor %}
+	    </div>
+		</div>
+	{% endif %}
 {% endblock %}
