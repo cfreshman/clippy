@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import User, Group, Event
+from .models import UserProfile, GroupProfile, Event
 
-user_id = 6
+user_id = 5
 
 # Create your views here.
 def index(request):
@@ -9,7 +9,7 @@ def index(request):
     View function for home page of site.
     """
 
-    viewer = User.objects.get(id=user_id)
+    viewer = UserProfile.objects.get(id=user_id)
     group_list = viewer.groups.all()
     hosting = viewer.hosting.distinct()
     invited = hosting | viewer.invited.distinct()
@@ -29,10 +29,10 @@ def user(request, id):
     if (id == user_id):
         return index(request)
 
-    viewer = User.objects.get(id=user_id)
+    viewer = UserProfile.objects.get(id=user_id)
     group_list = viewer.groups.all()
 
-    user_obj = User.objects.get(id=id)
+    user_obj = UserProfile.objects.get(id=id)
     hosting = user_obj.hosting.distinct()
     invited = hosting | user_obj.invited.distinct()
     upcoming = hosting | user_obj.joined.distinct()
@@ -48,10 +48,10 @@ def user(request, id):
     )
 
 def group(request, id):
-    viewer = User.objects.get(id=user_id)
+    viewer = UserProfile.objects.get(id=user_id)
     group_list = viewer.groups.all()
 
-    group_obj = Group.objects.get(id=id)
+    group_obj = GroupProfile.objects.get(id=id)
     members = group_obj.members.exclude(id=user_id)
     events = group_obj.events.all()
 
@@ -66,7 +66,7 @@ def group(request, id):
     )
 
 def event(request):
-    viewer = User.objects.get(id=user_id)
+    viewer = UserProfile.objects.get(id=user_id)
 
     return render(
         request,
@@ -75,7 +75,7 @@ def event(request):
     )
 
 def manager(request):
-    viewer = User.objects.get(id=user_id)
+    viewer = UserProfile.objects.get(id=user_id)
     group_list = viewer.groups.all()
 
     return render(
@@ -86,7 +86,7 @@ def manager(request):
     )
 
 def settings(request):
-    viewer = User.objects.get(id=user_id)
+    viewer = UserProfile.objects.get(id=user_id)
 
     return render(
         request,
