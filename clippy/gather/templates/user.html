@@ -1,12 +1,12 @@
 {% extends "index.html" %}
 
-{% block title %}<title>{{ user }}</title>{% endblock %}
+{% block title %}<title>{{ profile }}</title>{% endblock %}
 
 {% block page-info %}
 	<div class="page-info card spaced">
-		<img class="card-img-top" src="{{ user.picture.url }}" alt="{{ user }}">
+		<img class="card-img-top" src="{{ profile.picture.url }}" alt="{{ profile }}">
 		<div class="card-body">
-			<h4 class="card-title">{{ user }}</h4>
+			<h4 class="card-title">{{ profile }}</h4>
 		</div>
 	</div>
 {% endblock %}

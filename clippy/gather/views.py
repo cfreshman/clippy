@@ -1,15 +1,15 @@
 from django.shortcuts import render
-from .models import UserProfile, GroupProfile, Event
-
-user_id = 5
+from .models import Profile, EventGroup, Event
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def index(request):
     """
     View function for home page of site.
     """
 
-    viewer = UserProfile.objects.get(id=user_id)
+    viewer = request.user.profile
     group_list = viewer.groups.all()
     hosting = viewer.hosting.distinct()
     invited = hosting | viewer.invited.distinct()
@@ -25,34 +25,36 @@ def index(request):
         		 'upcoming': upcoming},
     )
 
+@login_required
 def user(request, id):
-    if (id == user_id):
+    viewer = request.user.profile
+    if (id == viewer.id):
         return index(request)
 
-    viewer = UserProfile.objects.get(id=user_id)
     group_list = viewer.groups.all()
 
-    user_obj = UserProfile.objects.get(id=id)
-    hosting = user_obj.hosting.distinct()
-    invited = hosting | user_obj.invited.distinct()
-    upcoming = hosting | user_obj.joined.distinct()
+    profile = Profile.objects.get(id=id)
+    hosting = profile.hosting.distinct()
+    invited = hosting | profile.invited.distinct()
+    upcoming = hosting | profile.joined.distinct()
 
     return render(
         request,
         'user.html',
         context={'viewer': viewer,
-                 'user': user_obj,
+                 'profile': profile,
                  'group_list': group_list, 'group_id': -1,
                  'event_list': invited,
                  'upcoming': upcoming},
     )
 
+@login_required
 def group(request, id):
-    viewer = UserProfile.objects.get(id=user_id)
+    viewer = request.user.profile
     group_list = viewer.groups.all()
 
-    group_obj = GroupProfile.objects.get(id=id)
-    members = group_obj.members.exclude(id=user_id)
+    group_obj = EventGroup.objects.get(id=id)
+    members = group_obj.members.exclude(id=viewer.id)
     events = group_obj.events.all()
 
     return render(
@@ -65,8 +67,9 @@ def group(request, id):
         		 'members': members},
     )
 
+@login_required
 def event(request):
-    viewer = UserProfile.objects.get(id=user_id)
+    viewer = request.user.profile
 
     return render(
         request,
@@ -74,8 +77,9 @@ def event(request):
         context={'viewer': viewer}
     )
 
+@login_required
 def manager(request):
-    viewer = UserProfile.objects.get(id=user_id)
+    viewer = request.user.profile
     group_list = viewer.groups.all()
 
     return render(
@@ -85,8 +89,9 @@ def manager(request):
                  'group_list': group_list, 'group_id': -1,}
     )
 
+@login_required
 def settings(request):
-    viewer = UserProfile.objects.get(id=user_id)
+    viewer = request.user.profile
 
     return render(
         request,

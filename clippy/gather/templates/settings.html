@@ -14,7 +14,7 @@
           {% load static %}
           <img class="img-thumbnail mb-2" src="{{ viewer.picture.url }}">
           <br>
-          <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+          <input type="file" class="form-control-file">
           <br>
           <a href="#" class="btn btn-light">Change Profile Picture</a>
         </div>
@@ -27,13 +27,13 @@
       <h3 class="card-header">Name</h3>
       <div class="card-body">
         <div class="input-group">
-          <span class="input-group-addon" id="name-addon">First Name</span>
-          <input type="text" class="form-control" value="{{ viewer.first_name }}" placeholder="{{ viewer.first_name }}" aria-describedby="fname-input">
+          <span class="input-group-addon">First Name</span>
+          <input type="text" class="form-control" value="{{ user.first_name }}">
         </div>
         <br>
         <div class="input-group">
-          <span class="input-group-addon" id="name-addon">Last Name</span>
-          <input type="text" class="form-control" value="{{ viewer.last_name }}" placeholder="{{ viewer.last_name }}" aria-describedby="lname-input">
+          <span class="input-group-addon">Last Name</span>
+          <input type="text" class="form-control" value="{{ user.last_name }}">
         </div>
       </div>
     </div>
@@ -46,8 +46,8 @@
       <!-- <div class="card-text">How you appear to others</div>
       <br> -->
       <div class="input-group">
-        <span class="input-group-addon" id="fname-addon">@</span>
-        <input type="text" class="form-control" placeholder="Will depend on login/logout" aria-describedby="fname-input">
+        <span class="input-group-addon">@</span>
+        <input type="text" class="form-control" value="{{ user.username }}">
       </div>
     </div>
   </div>
@@ -58,12 +58,12 @@
     <div class="card-body">
       <div class="input-group">
         <span class="input-group-addon" id="pass-addon">Password</span>
-        <input type="text" class="form-control" placeholder="" aria-describedby="pass-input">
+        <input type="text" class="form-control">
       </div>
       <br>
       <div class="input-group">
         <span class="input-group-addon" id="pass-addon">Confirm</span>
-        <input type="text" class="form-control" aria-describedby="pass-confirm-input">
+        <input type="text" class="form-control">
       </div>
       <br>
       <div class="btn btn-light">Change Password</a>
