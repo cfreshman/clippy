@@ -6,85 +6,95 @@ from django.core.urlresolvers import reverse
 from django.utils.http import is_safe_url
 import datetime
 
+def get_viewer_and_context(profile):
+    groups = profile.groups.all()
+    hosting = profile.hosting.distinct()
+    invited = hosting | profile.invited.distinct()
+    upcoming = hosting | profile.joined.distinct()
+    print(upcoming)
+    viewer = {
+        'profile': profile,
+        'id': profile.id,
+        'groups': groups,
+        'hosting': hosting,
+        'invited': invited,
+        'upcoming': upcoming,
+    }
+
+    hosting = [e.id for e in hosting]
+    joined = filter(lambda e: e.joined.filter(id=profile.id).exists(), invited)
+    joined = [e.id for e in joined]
+    hidden = [e.id for e in profile.hidden.distinct()]
+
+    context = {
+        'viewer': profile,
+        'group_list': groups,
+        'group_id': 0,
+        'event_list': invited,
+        'upcoming': upcoming,
+        'hosting': hosting,
+        'joined': joined,
+        'hidden': hidden,
+    }
+
+    return viewer, context
+
+
 # Create your views here.
 @login_required
 def index(request):
     """
     View function for home page of site.
     """
-    viewer = request.user.profile
-    group_list = viewer.groups.all()
-    hosting = viewer.hosting.distinct()
-    invited = hosting | viewer.invited.distinct()
-    upcoming = hosting | viewer.joined.distinct()
-
-    hosting = [e.id for e in hosting]
-
-    joined = filter(lambda e: e.joined.filter(id=viewer.id).exists(), invited)
-    joined = [e.id for e in joined]
+    viewer, context = get_viewer_and_context(request.user.profile)
 
     # Render the HTML template index.html with the data in the context variable
     return render(
         request,
         'index.html',
-        context={'viewer': viewer,
-                 'group_list': group_list, 'group_id': 0,
-        		 'event_list': invited,
-        		 'upcoming': upcoming,
-                 'hosting': hosting, 'joined': joined,}
+        context=context
     )
 
 @login_required
 def view_user(request, id):
-    viewer = request.user.profile
-    hosting = viewer.hosting.distinct()
-    if (id == viewer.id):
+    if (id == request.user.profile.id):
         return index(request)
 
-    group_list = viewer.groups.all()
+    viewer, context = get_viewer_and_context(request.user.profile)
 
     profile = Profile.objects.get(id=id)
-    other_hosting = profile.hosting.distinct()
-    invited = ((other_hosting | profile.invited.distinct()) 
-        & (hosting | viewer.invited.distinct()))
-    upcoming = ((other_hosting | profile.joined.distinct()) 
-        & (hosting | viewer.joined.distinct()))
-
-    joined = filter(lambda e: e.joined.filter(id=viewer.id).exists(), invited)
-    joined = map(lambda e: e.id, joined)
+    hosting = profile.hosting.distinct()
+    invited = (hosting | profile.invited.distinct()) & viewer['invited']
+    upcoming = (hosting | profile.joined.distinct()) & viewer['upcoming']
 
     return render(
         request,
         'user.html',
-        context={'viewer': viewer,
+        context={**context,
                  'profile': profile,
-                 'group_list': group_list, 'group_id': -1,
+                 'group_id': -1,
                  'event_list': invited,
                  'upcoming': upcoming,
-                 'joined': joined,}
+                 'hidden': []}
     )
 
 @login_required
 def view_group(request, id):
-    viewer = request.user.profile
-    group_list = viewer.groups.all()
+    viewer, context = get_viewer_and_context(request.user.profile)
 
-    group_obj = EventGroup.objects.get(id=id)
-    members = group_obj.members.exclude(id=viewer.id)
-    events = group_obj.events.all()
-
-    joined = filter(lambda e: e.joined.filter(id=viewer.id).exists(), events)
-    joined = map(lambda e: e.id, joined)
+    group = EventGroup.objects.get(id=id)
+    members = group.members.exclude(id=viewer['id'])
+    events = group.events.all()
 
     return render(
         request,
         'group.html',
-        context={'viewer': viewer,
-                 'group': group_obj,
-                 'group_list': group_list,'group_id': int(id),
+        context={**context,
+                 'group': group,
+                 'group_id': int(id),
         		 'event_list': events,
         		 'members': members,
-                 'joined': joined,}
+                 'hidden': []}
     )
 
 @login_required
@@ -162,10 +172,11 @@ def event_reply(request, id, reply):
     if event.invited.filter(id=viewer.id).exists():
         if reply == 'join':
             event.joined.add(viewer)
+            event.hidden.remove(viewer)
         elif reply == 'leave':
             event.joined.remove(viewer)
         elif reply == 'hide':
-            event.invited.remove(viewer)
+            event.hidden.add(viewer)
         event.save()
 
     redirect_to = request.GET.get('next', '')

@@ -30,6 +30,7 @@
     <div id="event-feed">
       {% if event_list %}
         {% for event in event_list %}
+        {% if event.id not in hidden %}
         <div class="event card spaced">
           {% if event.picture %}
             <img class="card-img-top" src="{{ event.picture.url }}">
@@ -46,7 +47,9 @@
                 <a href="{% url 'event_reply' event.id 'leave' %}?next={{request.path}}" class="btn btn-light">Leave</a>
               {% else %}
                 <a href="{% url 'event_reply' event.id 'join' %}?next={{request.path}}" class="btn btn-dark">Join</a>
-                <a href="{% url 'event_reply' event.id 'hide' %}?next={{request.path}}" class="btn btn-light">Hide</a>
+                {% if group_id == 0 %}
+                  <a href="{% url 'event_reply' event.id 'hide' %}?next={{request.path}}" class="btn btn-light">Hide</a>
+                {% endif %}
               {% endif %}
             </div>
             <div class="card-content">
@@ -56,6 +59,7 @@
             </div>
           </div>
         </div>
+        {% endif %}
         {% endfor %}
       {% else %}
         <p class="spaced">No upcoming events</p>

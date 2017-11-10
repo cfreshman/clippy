@@ -39,6 +39,7 @@ class Event(models.Model):
     groups = models.ManyToManyField(EventGroup, blank=True, related_name="events", help_text="Groups this user is associated with")
     invited = models.ManyToManyField(Profile, blank=True, related_name="invited", help_text="These users are invited to the event")
     joined = models.ManyToManyField(Profile, blank=True, related_name="joined", help_text="These users have joined the Event")
+    hidden = models.ManyToManyField(Profile, blank=True, related_name="hidden", help_text="These users have hidden the Event")
     picture = models.ImageField(upload_to='images/event/', blank=True, null=True)
 
     class Meta: 
