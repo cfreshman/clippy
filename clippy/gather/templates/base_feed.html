@@ -8,7 +8,7 @@
 
       <!-- Create Event -->
       <div class="list-group spaced">
-        <a class="list-group-item list-group-item-action active" href="{% url 'event' %}">Create Event</a>
+        <a class="list-group-item list-group-item-action active" href="{% url 'create_event' %}">Create Event</a>
       </div>
 
       <!-- Group List -->
@@ -17,7 +17,7 @@
         {% for group in group_list %}
           <a class="list-group-item list-group-item-action {% if group_id == group.id %}active{% endif %}" href="{% url 'group' group.id %}">{{ group.name }}</a>
         {% endfor %}
-        <a class="list-group-item list-group-item-action list-group-item-secondary" href="{% url 'manager' %}">Create Group</a>
+        <a class="list-group-item list-group-item-action list-group-item-secondary" href="{% url 'create_group' %}">Create Group</a>
       </div>
     </div>
   </aside>
@@ -36,8 +36,18 @@
           {% endif %}
           <div class="card-body">
             <div class="card-aside">
-              <a href="#" class="btn btn-dark">Join</a>
-              <a href="#" class="btn btn-light">Hide</a>
+              <!-- <form action="{% url 'event_reply' event.id 'join' %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Join" class="btn btn-dark"/>
+              </form> -->
+              {% if event.id in hosting %}
+                <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-dark">Edit</a>
+              {% elif event.id in joined %}
+                <a href="{% url 'event_reply' event.id 'leave' %}?next={{request.path}}" class="btn btn-light">Leave</a>
+              {% else %}
+                <a href="{% url 'event_reply' event.id 'join' %}?next={{request.path}}" class="btn btn-dark">Join</a>
+                <a href="{% url 'event_reply' event.id 'hide' %}?next={{request.path}}" class="btn btn-light">Hide</a>
+              {% endif %}
             </div>
             <div class="card-content">
               <h4 class="card-title">{{ event.title }}</h4>
