@@ -11,7 +11,6 @@ def get_viewer_and_context(profile):
     hosting = profile.hosting.distinct()
     invited = hosting | profile.invited.distinct()
     upcoming = hosting | profile.joined.distinct()
-    print(upcoming)
     viewer = {
         'profile': profile,
         'id': profile.id,
