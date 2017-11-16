@@ -19,6 +19,7 @@ urlpatterns = [
 	url(r'^e/(?P<id>\d+)/edit$', views.edit_event, name='edit_event'),
 
 	# interact
-	url(r'^g/(?P<id>\d+)/leave$', views.edit_group, name='leave_group'),
-	url(r'^e/(?P<id>\d+)/(?P<reply>\w+)$', views.event_reply, name='event_reply'),
+	url(r'^u/(?P<id>\d+)/(?P<action>\w+)$', views.user_action, name='user_action'),
+	url(r'^g/(?P<id>\d+)/(?P<action>\w+)$', views.group_action, name='group_action'),
+	url(r'^e/(?P<id>\d+)/(?P<action>\w+)$', views.event_action, name='event_action'),
 ]

@@ -44,11 +44,11 @@
               {% if event.id in hosting %}
                 <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-dark">Edit</a>
               {% elif event.id in joined %}
-                <a href="{% url 'event_reply' event.id 'leave' %}?next={{request.path}}" class="btn btn-light">Leave</a>
+                <a href="{% url 'event_action' event.id 'leave' %}?next={{request.path}}" class="btn btn-light">Leave</a>
               {% else %}
-                <a href="{% url 'event_reply' event.id 'join' %}?next={{request.path}}" class="btn btn-dark">Join</a>
+                <a href="{% url 'event_action' event.id 'join' %}?next={{request.path}}" class="btn btn-dark">Join</a>
                 {% if group_id == 0 %}
-                  <a href="{% url 'event_reply' event.id 'hide' %}?next={{request.path}}" class="btn btn-light">Hide</a>
+                  <a href="{% url 'event_action' event.id 'hide' %}?next={{request.path}}" class="btn btn-light">Hide</a>
                 {% endif %}
               {% endif %}
             </div>

@@ -164,17 +164,67 @@ def edit_event(request, id):
 
 
 @login_required
-def event_reply(request, id, reply):
+def user_action(request, id, action):
     viewer = request.user.profile
 
     event = get_object_or_404(Event, id=id)
     if event.invited.filter(id=viewer.id).exists():
-        if reply == 'join':
+        if action == 'join':
             event.joined.add(viewer)
             event.hidden.remove(viewer)
-        elif reply == 'leave':
+        elif action == 'leave':
             event.joined.remove(viewer)
-        elif reply == 'hide':
+        elif action == 'hide':
+            event.hidden.add(viewer)
+        event.save()
+
+    redirect_to = request.GET.get('next', '')
+    if is_safe_url(url=redirect_to, host=request.get_host()):
+        return HttpResponseRedirect(redirect_to)
+
+    return render(
+        request,
+        'event.html',
+        context={'viewer': viewer}
+    )
+
+@login_required
+def group_action(request, id, action):
+    viewer = request.user.profile
+
+    event = get_object_or_404(Event, id=id)
+    if event.invited.filter(id=viewer.id).exists():
+        if action == 'join':
+            event.joined.add(viewer)
+            event.hidden.remove(viewer)
+        elif action == 'leave':
+            event.joined.remove(viewer)
+        elif action == 'hide':
+            event.hidden.add(viewer)
+        event.save()
+
+    redirect_to = request.GET.get('next', '')
+    if is_safe_url(url=redirect_to, host=request.get_host()):
+        return HttpResponseRedirect(redirect_to)
+
+    return render(
+        request,
+        'event.html',
+        context={'viewer': viewer}
+    )
+
+@login_required
+def event_action(request, id, action):
+    viewer = request.user.profile
+
+    event = get_object_or_404(Event, id=id)
+    if event.invited.filter(id=viewer.id).exists():
+        if action == 'join':
+            event.joined.add(viewer)
+            event.hidden.remove(viewer)
+        elif action == 'leave':
+            event.joined.remove(viewer)
+        elif action == 'hide':
             event.hidden.add(viewer)
         event.save()
 
