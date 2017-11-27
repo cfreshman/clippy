@@ -167,51 +167,23 @@ def edit_event(request, id):
 def user_action(request, id, action):
     viewer = request.user.profile
 
-    event = get_object_or_404(Event, id=id)
-    if event.invited.filter(id=viewer.id).exists():
-        if action == 'join':
-            event.joined.add(viewer)
-            event.hidden.remove(viewer)
-        elif action == 'leave':
-            event.joined.remove(viewer)
-        elif action == 'hide':
-            event.hidden.add(viewer)
-        event.save()
+    profile = get_object_or_404(Profile, id=id)
 
     redirect_to = request.GET.get('next', '')
     if is_safe_url(url=redirect_to, host=request.get_host()):
         return HttpResponseRedirect(redirect_to)
-
-    return render(
-        request,
-        'event.html',
-        context={'viewer': viewer}
-    )
+    return view_user(request, id)
 
 @login_required
 def group_action(request, id, action):
     viewer = request.user.profile
 
-    event = get_object_or_404(Event, id=id)
-    if event.invited.filter(id=viewer.id).exists():
-        if action == 'join':
-            event.joined.add(viewer)
-            event.hidden.remove(viewer)
-        elif action == 'leave':
-            event.joined.remove(viewer)
-        elif action == 'hide':
-            event.hidden.add(viewer)
-        event.save()
+    group = get_object_or_404(Group, id=id)
 
     redirect_to = request.GET.get('next', '')
     if is_safe_url(url=redirect_to, host=request.get_host()):
         return HttpResponseRedirect(redirect_to)
-
-    return render(
-        request,
-        'event.html',
-        context={'viewer': viewer}
-    )
+    return view_group(request, id)
 
 @login_required
 def event_action(request, id, action):
@@ -231,9 +203,4 @@ def event_action(request, id, action):
     redirect_to = request.GET.get('next', '')
     if is_safe_url(url=redirect_to, host=request.get_host()):
         return HttpResponseRedirect(redirect_to)
-
-    return render(
-        request,
-        'event.html',
-        context={'viewer': viewer}
-    )
+    return view_event(request, id)
