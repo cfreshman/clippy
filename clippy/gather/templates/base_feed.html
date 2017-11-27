@@ -37,10 +37,6 @@
           {% endif %}
           <div class="card-body">
             <div class="card-aside">
-              <!-- <form action="{% url 'event_reply' event.id 'join' %}" method="POST">
-                {% csrf_token %}
-                <input type="submit" value="Join" class="btn btn-dark"/>
-              </form> -->
               {% if event.id in hosting %}
                 <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-dark">Edit</a>
               {% elif event.id in joined %}
