@@ -20,15 +20,17 @@
       {% if user.is_authenticated %}
       <div class="form-inline">
         <!-- Search Box -->
-        <form class="search-box form-inline">
+        <!-- <form class="search-box form-inline">
           <input class="search-input form-control mr-sm-2" type="text" placeholder="Search">
           <span class="search-icon"></span>
-        </form>
+        </form> -->
 
         <!-- Account Icon -->
         <div class="dropdown">
-          <img class="profile-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{ viewer.picture.url }}">
-          <!-- <button type="button" class="profile-icon btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button> -->
+          <!-- <img class="profile-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{ viewer.picture.url }}"> -->
+          <a class="profile-icon btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="{{ viewer.picture.url }}">
+          </a>
           <div class="dropdown-menu dropdown-menu-right">
             <h3 class="dropdown-header">{{ viewer }}</h3>
             <div class="dropdown-divider"></div>

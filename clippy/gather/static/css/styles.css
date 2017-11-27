@@ -18,11 +18,22 @@
 }
 
 .profile-icon {
+	padding: 0;
+	cursor: pointer;
+}
+
+.profile-icon img {
 	width: 35px;
 	height: 35px;
 	border-radius: .25rem;
 	object-fit: cover;
 	cursor: pointer;
+}
+
+.profile-icon::after {
+	margin-left: .25em;
+	vertical-align: middle;
+	color: white;
 }
 
 .dropdown-menu-right {
@@ -32,10 +43,6 @@
 
 #header .dropdown-header {
 	cursor: default;
-}
-
-.profile-icon::after {
-	display: none;
 }
 
 .list-group-small {
