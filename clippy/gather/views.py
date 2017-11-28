@@ -197,6 +197,7 @@ class EventCreate(CreateView):
         form.cleaned_data['hosts'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
         return super(EventCreate, self).form_valid(form)
 
+@method_decorator(login_required, name='dispatch')
 class EventEdit(UpdateView):
     model = Event
     fields = ['title', 'location', 'time', 'description', 'picture']
