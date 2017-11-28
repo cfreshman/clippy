@@ -1,11 +1,16 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-    {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit" />
-</form>
+<div class="event card spaced">
+    <h4 class="card-header">Create Group</h4>
+    <div class="card-body">
+		<form action="" method="post" enctype="multipart/form-data">
+		    {% csrf_token %}
+		    <table class="pretty-form">
+		    {{ form.as_table }}
+		    </table>
+		    <input type="submit" value="Submit" />
+		</form>
+	</div>
+</div>
 {% endblock %}

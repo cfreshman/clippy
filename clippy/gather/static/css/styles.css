@@ -158,3 +158,15 @@
 .card-title:last-child {
 	margin-bottom: 0;
 }
+
+
+.pretty-form {
+	width: 100%;
+}
+.pretty-form td {
+	padding: .5rem;
+}
+.pretty-form .helptext {
+	font-size: .75rem;
+	float: left;
+}
