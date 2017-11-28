@@ -64,7 +64,7 @@
 	align-items: center;
 }
 .page-info .btn {
-	width: 4.5rem;
+	min-width: 4.5rem;
 }
 .page-info .btn:not(:last-child) {
 	margin-bottom: .25rem;

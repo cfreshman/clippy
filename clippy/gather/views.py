@@ -66,6 +66,7 @@ def view_user(request, id):
     viewer, context = get_viewer_and_context(request.user.profile)
 
     profile = Profile.objects.get(id=id)
+    is_friend = viewer['profile'] in profile.friends.all()
     hosting = profile.hosting.distinct()
     invited = (hosting | profile.invited.distinct()) & viewer['invited']
     upcoming = (hosting | profile.joined.distinct()) & viewer['upcoming']
@@ -76,6 +77,7 @@ def view_user(request, id):
         context={**context,
                  'profile': profile,
                  'group_id': -1,
+                 'is_friend': is_friend,
                  'event_list': invited,
                  'upcoming': upcoming,
                  'hidden': []}
@@ -184,18 +186,6 @@ def settings(request):
     )
 
 @login_required
-def edit_group(request, id):
-    viewer = request.user.profile
-    group_list = viewer.groups.all()
-
-    return render(
-        request,
-        'manager.html',
-        context={'viewer': viewer,
-                 'group_list': group_list, 'group_id': id}
-    )
-
-@login_required
 def edit_event(request, id):
     viewer = request.user.profile
 
@@ -221,7 +211,7 @@ def user_action(request, id, action):
 def group_action(request, id, action):
     viewer = request.user.profile
 
-    group = get_object_or_404(Group, id=id)
+    group = get_object_or_404(EventGroup, id=id)
 
     redirect_to = request.GET.get('next', '')
     if is_safe_url(url=redirect_to, host=request.get_host()):

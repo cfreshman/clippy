@@ -8,6 +8,15 @@
 		<div class="card-body">
 			<h4 class="card-title">{{ profile }}</h4>
 			<h6 class="card-subtitle mb-2 text-muted">@{{ profile.user.username }}</h6>
+			{% if is_friend %}
+				<div class="page-buttons">
+					<a href="{% url 'user_action' user.id 'unfriend' %}?next={{request.path}}" class="btn btn-light">Unfriend</a>
+				</div>
+			{% else %}
+				<div class="page-buttons">
+					<a href="{% url 'user_action' user.id 'friend' %}?next={{request.path}}" class="btn btn-dark">Friend</a>
+				</div>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}
