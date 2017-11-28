@@ -10,7 +10,7 @@ urlpatterns = [
 
 	# view
 	url(r'^u/(?P<id>\d+)$', views.view_user, name='user'),
-	url(r'^g/(?P<id>\d+)$', views.view_group, name='group'),
+	url(r'^g/(?P<id>\d+)$', views.GroupEdit.as_view(), name='group'),
 	url(r'^e/(?P<id>\d+)$', views.view_event, name='event'),
 
 	# edit
