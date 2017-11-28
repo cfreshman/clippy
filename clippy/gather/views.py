@@ -126,6 +126,11 @@ def create_group(request):
 class GroupCreate(CreateView):
     model = EventGroup
     fields = '__all__'
+    
+    
+class GroupEdit(UpdateView):
+    model = EventGroup
+    fields = '__all__'
 
 
 @login_required
