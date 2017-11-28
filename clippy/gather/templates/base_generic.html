@@ -24,6 +24,7 @@
           <form class="input-group" action="{% url 'search' %}" method="post">
             <span class="input-group-addon">@</span>
             {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.path }}">
             <input type="text" class="form-control" name="username" placeholder="Username">
           </form>
           <span class="search-icon" onclick="$('.search-box form').submit()"></span>

@@ -257,3 +257,4 @@ def search(request):
         username = form.cleaned_data['username']
         user = get_object_or_404(User, username=username)
         return HttpResponseRedirect(user.profile.get_absolute_url())
+    return HttpResponseRedirect(reverse('index'))
