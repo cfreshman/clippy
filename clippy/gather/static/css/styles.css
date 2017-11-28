@@ -4,7 +4,7 @@
 
 .search-box .input-group {
 	height: 35px;
-	margin-right: .5em;
+	margin-right: .5rem;
 }
 .search-box .input-group-addon {
     background-color: #f7f7f7;
@@ -43,7 +43,7 @@
 }
 
 .profile-icon::after {
-	margin-left: .125em;
+	margin-left: .125rem;
 	vertical-align: middle;
 	color: white;
 }

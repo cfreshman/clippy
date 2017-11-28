@@ -17,7 +17,7 @@ class Profile(models.Model):
 
 class EventGroup(models.Model):
     name = models.CharField(max_length=200, help_text="Enter a name for the group")
-    description = models.TextField(max_length=1000, blank=True, null=True, help_text="Enter a bried description of the group")
+    description = models.TextField(max_length=1000, blank=True, null=True, help_text="Enter a brief description of the group")
     members = models.ManyToManyField(Profile, related_name="groups", help_text="Select members for this group")
     picture = models.ImageField(upload_to="images/group/", blank=True, null=True)
 
