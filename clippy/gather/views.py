@@ -260,6 +260,11 @@ def user_action(request, id, action):
 
     profile = get_object_or_404(Profile, id=id)
 
+    if action == 'unfriend':
+        profile.friends.remove(viewer)
+    elif action == 'friend':
+        profile.friends.add(viewer)
+
     redirect_to = request.GET.get('next', '')
     if is_safe_url(url=redirect_to, host=request.get_host()):
         return HttpResponseRedirect(redirect_to)
@@ -270,6 +275,9 @@ def group_action(request, id, action):
     viewer = request.user.profile
 
     group = get_object_or_404(EventGroup, id=id)
+
+    if action == 'leave':
+        group.members.remove(viewer)
 
     redirect_to = request.GET.get('next', '')
     if is_safe_url(url=redirect_to, host=request.get_host()):
