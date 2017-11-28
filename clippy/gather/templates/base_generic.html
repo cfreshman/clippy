@@ -32,10 +32,10 @@
         <!-- Account Icon -->
         <div class="dropdown">
           <a class="profile-icon btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="{{ viewer.picture.url }}">
+            <img src="{{ user.profile.picture.url }}">
           </a>
           <div class="dropdown-menu dropdown-menu-right">
-            <h3 class="dropdown-header">{{ viewer }}</h3>
+            <h3 class="dropdown-header">{{ user.profile }}</h3>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{% url 'create_event' %}">New event</a>
             <a class="dropdown-item" href="{% url 'create_group' %}">New group</a>
