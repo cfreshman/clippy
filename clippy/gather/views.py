@@ -179,7 +179,7 @@ def create_event(request):
 
     return render(
         request,
-        'event.html',
+        'create_event.html',
         context={'viewer': viewer}
     )
 
@@ -200,7 +200,7 @@ def edit_event(request, id):
 
     return render(
         request,
-        'event.html',
+        'create_event.html',
         context={'viewer': viewer}
     )
 
