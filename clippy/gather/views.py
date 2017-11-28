@@ -184,12 +184,20 @@ def create_event(request):
 @method_decorator(login_required, name='dispatch')
 class EventCreate(CreateView):
     model = Event
-    fields = ['title', 'location', 'time', 'description', 'picture', 'hosts']
+    fields = ['title', 'location', 'time', 'description', 'picture', 'groups', 'hosts', 'invited']
 
     def get_form(self, form_class=None):    
         form = super(EventCreate, self).get_form(form_class)
+        for field in ['title', 'location', 'time', 'description']:
+            form.fields[field].help_text = ''
+        form.fields['time'].widget.attrs['placeholder'] = 'MM/DD/YYYY HH:MM:SS'
+        form.fields['groups'].queryset = self.request.user.profile.groups.distinct()
+        form.fields['groups'].help_text = 'Select groups to invite to the event'
         form.fields['hosts'].required = False
         form.fields['hosts'].queryset = self.request.user.profile.friends.distinct()
+        form.fields['hosts'].help_text = 'Select additional hosts for the event'
+        form.fields['invited'].queryset = self.request.user.profile.friends.distinct()
+        form.fields['invited'].help_text = 'Select individuals users to invite to the event'
         return form
 
     def form_valid(self, form):
@@ -200,7 +208,26 @@ class EventCreate(CreateView):
 @method_decorator(login_required, name='dispatch')
 class EventEdit(UpdateView):
     model = Event
-    fields = ['title', 'location', 'time', 'description', 'picture']
+    fields = ['title', 'location', 'time', 'description', 'picture', 'groups', 'hosts', 'invited']
+
+    def get_form(self, form_class=None):    
+        form = super(EventEdit, self).get_form(form_class)
+        for field in ['title', 'location', 'time', 'description']:
+            form.fields[field].help_text = ''
+        form.fields['time'].widget.attrs['placeholder'] = 'YYYY-MM-DD HH:MM:SS'
+        form.fields['groups'].queryset = self.request.user.profile.groups.distinct()
+        form.fields['groups'].help_text = 'Select groups to invite to the event'
+        form.fields['hosts'].required = False
+        form.fields['hosts'].queryset = self.request.user.profile.friends.distinct()
+        form.fields['hosts'].help_text = 'Select additional hosts for the event'
+        form.fields['invited'].queryset = self.request.user.profile.friends.distinct()
+        form.fields['invited'].help_text = 'Select individuals users to invite to the event'
+        return form
+
+    def form_valid(self, form):
+        form.cleaned_data['hosts'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
+        form.save()
+        return super(EventEdit, self).form_valid(form)
 
 @login_required
 def settings(request):

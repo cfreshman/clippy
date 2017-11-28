@@ -173,6 +173,9 @@
 .pretty-form td {
 	padding: .5rem;
 }
+.pretty-form input[type='text'] {
+	min-width: 50%;
+}
 .pretty-form .helptext {
 	font-size: .75rem;
 	float: left;
