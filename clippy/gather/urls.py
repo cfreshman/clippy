@@ -10,12 +10,12 @@ urlpatterns = [
 
 	# view
 	url(r'^u/(?P<id>\d+)$', views.view_user, name='user'),
-	url(r'^g/(?P<id>\d+)$', views.GroupEdit.as_view(), name='group'),
+	url(r'^g/(?P<id>\d+)$', views.view_group, name='group'),
 	url(r'^e/(?P<id>\d+)$', views.view_event, name='event'),
 
 	# edit
 	url(r'^settings/$', views.settings, name='settings'),
-	url(r'^g/(?P<id>\d+)/edit$', views.edit_group, name='edit_group'),
+	url(r'^g/(?P<id>\d+)/edit$', views.GroupEdit.as_view(), name='edit_group'),
 	url(r'^e/(?P<id>\d+)/edit$', views.edit_event, name='edit_event'),
 
 	# interact
