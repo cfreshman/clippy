@@ -142,12 +142,12 @@ class GroupCreate(CreateView):
 
     def get_form(self, form_class=None):    
         form = super(GroupCreate, self).get_form(form_class)
-        form.fields['members'].queryset = self.request.user.profile.friends.all()
+        form.fields['members'].queryset = self.request.user.profile.friends.distinct()
         return form
 
     def form_valid(self, form):
         form.cleaned_data['members'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
-        return super(GroupEdit, self).form_valid(form)
+        return super(GroupCreate, self).form_valid(form)
 
 @method_decorator(login_required, name='dispatch')
 class GroupEdit(UpdateView):
