@@ -33,7 +33,9 @@
         {% if event.id not in hidden %}
         <div class="event card spaced">
           {% if event.picture %}
-            <img class="card-img-top" src="{{ event.picture.url }}">
+            <a href="{% url 'event' event.id %}">
+              <img class="card-img-top" src="{{ event.picture.url }}">
+            </a>
           {% endif %}
           <div class="card-body">
             <div class="card-aside">
