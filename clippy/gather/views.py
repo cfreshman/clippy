@@ -208,7 +208,6 @@ class EventCreate(CreateView):
 
     def form_valid(self, form):
         form.cleaned_data['hosts'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
-        form.save()
         return super(EventCreate, self).form_valid(form)
 
 @method_decorator(login_required, name='dispatch')
@@ -232,15 +231,19 @@ class EventEdit(UpdateView):
 
     def form_valid(self, form):
         form.cleaned_data['hosts'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
-        form.save()
         return super(EventEdit, self).form_valid(form)
 
 class ProfileEdit(UpdateView):
     model = Profile
-
     fields = ['friends', 'picture']
+
     def get_object(self, queryset=None):
-        return Profile.objects.get(user=self.request.user)
+        return self.request.user.profile
+
+    def get_form(self, form_class=None):    
+        form = super(ProfileEdit, self).get_form(form_class)
+        form.fields['friends'].queryset = self.object.friends.distinct()
+        return form
 
 
 @login_required
