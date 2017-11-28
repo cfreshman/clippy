@@ -22,4 +22,5 @@ urlpatterns = [
 	url(r'^u/(?P<id>\d+)/(?P<action>\w+)$', views.user_action, name='user_action'),
 	url(r'^g/(?P<id>\d+)/(?P<action>\w+)$', views.group_action, name='group_action'),
 	url(r'^e/(?P<id>\d+)/(?P<action>\w+)$', views.event_action, name='event_action'),
+	url(r'^search/$', views.search, name='search'),
 ]

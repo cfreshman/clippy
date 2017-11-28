@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
 from .models import Profile, EventGroup, Event
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -204,3 +205,14 @@ def event_action(request, id, action):
     if is_safe_url(url=redirect_to, host=request.get_host()):
         return HttpResponseRedirect(redirect_to)
     return view_event(request, id)
+
+from .forms import SearchForm
+@login_required
+def search(request):
+    viewer = request.user.profile
+
+    form = SearchForm(request.POST)
+    if form.is_valid():
+        username = form.cleaned_data['username']
+        user = get_object_or_404(User, username=username)
+        return HttpResponseRedirect(user.profile.get_absolute_url())

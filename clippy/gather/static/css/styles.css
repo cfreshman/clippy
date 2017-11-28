@@ -2,7 +2,18 @@
 	position: relative;
 }
 
-.search-icon {
+.search-box .input-group {
+	height: 35px;
+	margin-right: .5em;
+}
+.search-box .input-group-addon {
+    background-color: #f7f7f7;
+    border-color: #dfdfdf;
+}
+.search-box .form-control {
+    border-color: #dfdfdf;
+}
+.search-box .search-icon {
 	background-image: url(../icons/search.svg);
 	background-position: right;
 	background-origin: content-box;
@@ -15,6 +26,7 @@
 	right: 0;
 	bottom: 0;
 	cursor: pointer;
+	z-index: 3;
 }
 
 .profile-icon {
@@ -31,7 +43,7 @@
 }
 
 .profile-icon::after {
-	margin-left: .25em;
+	margin-left: .125em;
 	vertical-align: middle;
 	color: white;
 }
