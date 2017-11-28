@@ -178,7 +178,8 @@
 .pretty-form td {
 	padding: .5rem;
 }
-.pretty-form input[type='text'] {
+.pretty-form input[type='text'],
+.pretty-form textarea {
 	min-width: 50%;
 }
 .pretty-form .helptext {
