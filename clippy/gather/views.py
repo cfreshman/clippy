@@ -187,6 +187,10 @@ class EventCreate(CreateView):
     model = Event
     fields = ['title', 'location', 'time', 'description', 'picture']
 
+class EventEdit(UpdateView):
+    model = Event
+    fields = ['title', 'location', 'time', 'description', 'picture']
+
 @login_required
 def settings(request):
     viewer = request.user.profile

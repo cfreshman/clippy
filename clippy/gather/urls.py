@@ -16,7 +16,7 @@ urlpatterns = [
 	# edit
 	url(r'^settings/$', views.settings, name='settings'),
 	url(r'^g/(?P<pk>\d+)/edit$', views.GroupEdit.as_view(), name='edit_group'),
-	url(r'^e/(?P<id>\d+)/edit$', views.edit_event, name='edit_event'),
+	url(r'^e/(?P<pk>\d+)/edit$', views.EventEdit.as_view(success_url="/"), name='edit_event'),
 
 	# interact
 	url(r'^u/(?P<id>\d+)/(?P<action>\w+)$', views.user_action, name='user_action'),
