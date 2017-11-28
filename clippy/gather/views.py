@@ -183,6 +183,9 @@ def create_event(request):
         context={'viewer': viewer}
     )
 
+class EventCreate(CreateView):
+    model = Event
+    fields = ['title', 'location', 'time', 'description', 'picture']
 
 @login_required
 def settings(request):

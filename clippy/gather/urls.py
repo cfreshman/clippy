@@ -6,7 +6,7 @@ urlpatterns = [
 
 	# create
 	url(r'^g/new$', views.GroupCreate.as_view(), name='create_group'),
-	url(r'^e/new$', views.create_event, name='create_event'),
+	url(r'^e/new$', views.EventCreate.as_view(success_url="/"), name='create_event'),
 
 	# view
 	url(r'^u/(?P<id>\d+)$', views.view_user, name='user'),
