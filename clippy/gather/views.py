@@ -104,12 +104,21 @@ def view_group(request, id):
 
 @login_required
 def view_event(request, id):
-    viewer = request.user.profile
+    viewer, context = get_viewer_and_context(request.user.profile)
+
+    event = Event.objects.get(id=id)
+    going = (event.joined.all() | event.hosts.all()).distinct()
+    events = Event.objects.filter(id=id)
 
     return render(
         request,
         'event.html',
-        context={'viewer': viewer}
+        context={**context,
+                 'event': event,
+                 'group_id': -1,
+                 'event_list': events,
+                 'going': going,
+                 'hidden': []}
     )
 
 
