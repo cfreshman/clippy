@@ -235,15 +235,13 @@ class EventEdit(UpdateView):
         form.save()
         return super(EventEdit, self).form_valid(form)
 
-@login_required
-def settings(request):
-    viewer = request.user.profile
+class ProfileEdit(UpdateView):
+    model = Profile
 
-    return render(
-        request,
-        'settings.html',
-        context={'viewer': viewer}
-    )
+    fields = ['friends', 'picture']
+    def get_object(self, queryset=None):
+        return Profile.objects.get(user=self.request.user)
+
 
 @login_required
 def edit_event(request, id):
