@@ -7,6 +7,7 @@
 		<img class="card-img-top" src="{{ profile.picture.url }}" alt="{{ profile }}">
 		<div class="card-body">
 			<h4 class="card-title">{{ profile }}</h4>
+			<h6 class="card-subtitle mb-2 text-muted">@{{ profile.user.username }}</h6>
 		</div>
 	</div>
 {% endblock %}
