@@ -4,18 +4,18 @@
 
 {% block slide %}
   <!-- Going -->
-  {% if going %}
-		<div class="card spaced" id="slide">
-		  <h4 class="card-header">Going</h4>
-	    <div class="card-slide">
-	    	{% for profile in going %}
-	    		<div class="member-icon">
-	    			<a href="{% url 'user' profile.id %}">
-	    				<img src="{{ profile.picture.url }}" title="{{ profile }}">
-	    			</a>
-	    		</div>
-	      {% endfor %}
+  <!-- {% if going %}
+    <div class="card spaced" id="slide">
+	  <h4 class="card-header">Going</h4>
+	  <div class="card-slide">
+	    {% for profile in going %}
+	    <div class="member-icon">
+	   	  <a href="{% url 'user' profile.id %}">
+	      	<img src="{{ profile.picture.url }}" title="{{ profile }}">
+	      </a>
 	    </div>
-		</div>
-	{% endif %}
+	    {% endfor %}
+	  </div>
+	</div>
+  {% endif %} -->
 {% endblock %}

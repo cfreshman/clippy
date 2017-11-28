@@ -167,8 +167,6 @@ class GroupEdit(UpdateView):
         return form
 
     def form_valid(self, form):
-        # if not self.request.user.profile in self.object.members.all():
-        #     return False
         form.cleaned_data['members'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
         return super(GroupEdit, self).form_valid(form)
 
@@ -190,11 +188,13 @@ class EventCreate(CreateView):
 
     def get_form(self, form_class=None):    
         form = super(EventCreate, self).get_form(form_class)
-        form.fields['hosts'].queryset = Profile.objects.filter(id=self.request.user.profile.id).distinct()
+        form.fields['hosts'].required = False
+        form.fields['hosts'].queryset = self.request.user.profile.friends.distinct()
         return form
 
     def form_valid(self, form):
         form.cleaned_data['hosts'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
+        form.save()
         return super(EventCreate, self).form_valid(form)
 
 @method_decorator(login_required, name='dispatch')

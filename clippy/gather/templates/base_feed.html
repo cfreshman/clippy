@@ -33,9 +33,9 @@
         {% if event.id not in hidden %}
         <div class="event card spaced">
           {% if event.picture %}
-            <a href="{% url 'event' event.id %}">
+            <!-- <a href="{% url 'event' event.id %}"> -->
               <img class="card-img-top" src="{{ event.picture.url }}">
-            </a>
+            <!-- </a> -->
           {% endif %}
           <div class="card-body">
             <div class="card-aside">
@@ -55,6 +55,22 @@
               <h6 class="card-subtitle mb-2 text-muted">{{ event.location }} • {{ event.time }}</h6>
               <p class="card-text">{{ event.description }}</p>
             </div>
+          </div>
+          <div class="card-slide">
+            {% for profile in event.hosts.all %}
+            <div class="member-icon">
+              <a href="{% url 'user' profile.id %}">
+                <img src="{{ profile.picture.url }}" title="{{ profile }}">
+              </a>
+            </div>
+            {% endfor %}
+            {% for profile in event.joined.all %}
+            <div class="member-icon">
+              <a href="{% url 'user' profile.id %}">
+                <img src="{{ profile.picture.url }}" title="{{ profile }}">
+              </a>
+            </div>
+            {% endfor %}
           </div>
         </div>
         {% endif %}
