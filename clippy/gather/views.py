@@ -183,9 +183,19 @@ def create_event(request):
         context={'viewer': viewer}
     )
 
+@method_decorator(login_required, name='dispatch')
 class EventCreate(CreateView):
     model = Event
-    fields = ['title', 'location', 'time', 'description', 'picture']
+    fields = ['title', 'location', 'time', 'description', 'picture', 'hosts']
+
+    def get_form(self, form_class=None):    
+        form = super(EventCreate, self).get_form(form_class)
+        form.fields['hosts'].queryset = Profile.objects.filter(id=self.request.user.profile.id).distinct()
+        return form
+
+    def form_valid(self, form):
+        form.cleaned_data['hosts'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
+        return super(EventCreate, self).form_valid(form)
 
 class EventEdit(UpdateView):
     model = Event
