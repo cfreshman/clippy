@@ -109,6 +109,9 @@
 	object-fit: cover;
 	cursor: pointer;
 }
+#event-feed .member-icon {
+	padding: .3rem;
+}
 #event-feed .member-icon img {
 	width: 3rem;
 	height: 3rem;
