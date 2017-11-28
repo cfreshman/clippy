@@ -57,6 +57,19 @@
 	cursor: default;
 }
 
+.page-info .page-buttons {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.page-info .btn {
+	width: 4.5rem;
+}
+.page-info .btn:not(:last-child) {
+	margin-bottom: .25rem;
+}
+
 .list-group-small {
 	width: 30%;
 }

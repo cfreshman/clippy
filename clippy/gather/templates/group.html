@@ -10,6 +10,12 @@
 		<div class="card-body">
 			<h4 class="card-title">{{ group }}</h4>
 			<p class="card-text">{{ group.description }}</p>
+			{% if viewer in members %}
+			<div class="page-buttons">
+				<a href="{% url 'edit_group' group.id %}" class="btn btn-outline-dark">Edit</a>
+				<a href="{% url 'group_action' group.id 'leave' %}?next={{request.path}}" class="btn btn-light">Leave</a>
+			</div>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}

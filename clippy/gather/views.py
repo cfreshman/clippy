@@ -86,7 +86,7 @@ def view_group(request, id):
     viewer, context = get_viewer_and_context(request.user.profile)
 
     group = EventGroup.objects.get(id=id)
-    members = group.members.exclude(id=viewer['id'])
+    members = group.members.all()
     events = group.events.all()
 
     return render(
