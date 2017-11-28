@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from .models import Profile, EventGroup, Event
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils.http import is_safe_url
@@ -123,6 +124,7 @@ def create_group(request):
     )
 
 
+@method_decorator(login_required, name='dispatch')
 class GroupCreate(CreateView):
     model = EventGroup
     fields = '__all__'
@@ -135,10 +137,17 @@ class GroupCreate(CreateView):
     def form_valid(self, form):
         form.cleaned_data['members'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
         return super(GroupEdit, self).form_valid(form)
-    
+
+@method_decorator(login_required, name='dispatch')
 class GroupEdit(UpdateView):
     model = EventGroup
     fields = '__all__'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if not request.user.profile in self.object.members.all():
+            return HttpResponseRedirect(self.object.get_absolute_url())
+        return super(GroupEdit, self).dispatch(request, *args, **kwargs)
 
     def get_form(self, form_class=None):  
         form = super(GroupEdit, self).get_form(form_class)
@@ -147,6 +156,8 @@ class GroupEdit(UpdateView):
         return form
 
     def form_valid(self, form):
+        # if not self.request.user.profile in self.object.members.all():
+        #     return False
         form.cleaned_data['members'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
         return super(GroupEdit, self).form_valid(form)
 
