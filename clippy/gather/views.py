@@ -128,19 +128,6 @@ def view_event(request, id):
     )
 
 
-@login_required
-def create_group(request):
-    viewer = request.user.profile
-    group_list = viewer.groups.all()
-
-    return render(
-        request,
-        'manager.html',
-        context={'viewer': viewer,
-                 'group_list': group_list, 'group_id': -1}
-    )
-
-
 @method_decorator(login_required, name='dispatch')
 class GroupCreate(CreateView):
     model = EventGroup
@@ -176,16 +163,6 @@ class GroupEdit(UpdateView):
         form.cleaned_data['members'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
         return super(GroupEdit, self).form_valid(form)
 
-
-@login_required
-def create_event(request):
-    viewer = request.user.profile
-
-    return render(
-        request,
-        'create_event.html',
-        context={'viewer': viewer}
-    )
 
 @method_decorator(login_required, name='dispatch')
 class EventCreate(CreateView):
@@ -233,6 +210,7 @@ class EventEdit(UpdateView):
         form.cleaned_data['hosts'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
         return super(EventEdit, self).form_valid(form)
 
+
 class ProfileEdit(UpdateView):
     model = Profile
     fields = ['friends', 'picture']
@@ -244,17 +222,6 @@ class ProfileEdit(UpdateView):
         form = super(ProfileEdit, self).get_form(form_class)
         form.fields['friends'].queryset = self.object.friends.distinct()
         return form
-
-
-@login_required
-def edit_event(request, id):
-    viewer = request.user.profile
-
-    return render(
-        request,
-        'create_event.html',
-        context={'viewer': viewer}
-    )
 
 
 @login_required
