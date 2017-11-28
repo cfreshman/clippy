@@ -68,9 +68,13 @@ def view_user(request, id):
     viewer, context = get_viewer_and_context(request.user.profile)
 
     profile = Profile.objects.get(id=id)
+    groups = profile.groups.all()
     is_friend = viewer['profile'] in profile.friends.all()
     hosting = profile.hosting.distinct()
-    invited = (hosting | profile.invited.distinct()) & viewer['invited']
+    invited = (hosting | profile.invited.distinct())
+    for group in groups:
+        invited |= group.events.distinct()
+    invited &= viewer['invited']
     upcoming = (hosting | profile.joined.distinct()) & viewer['upcoming']
 
     return render(
