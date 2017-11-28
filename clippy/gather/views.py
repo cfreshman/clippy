@@ -131,7 +131,10 @@ class GroupCreate(CreateView):
         form = super(GroupCreate, self).get_form(form_class)
         form.fields['members'].queryset = self.request.user.profile.friends.all()
         return form
-    
+
+    def form_valid(self, form):
+        form.cleaned_data['members'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
+        return super(GroupEdit, self).form_valid(form)
     
 class GroupEdit(UpdateView):
     model = EventGroup
@@ -139,9 +142,13 @@ class GroupEdit(UpdateView):
 
     def get_form(self, form_class=None):  
         form = super(GroupEdit, self).get_form(form_class)
-        form.fields['members'].queryset = \
-            (self.object.members.all() | self.request.user.profile.friends.all()).distinct()
+        form.fields['members'].queryset = (self.object.members.exclude(id=self.request.user.profile.id) 
+                                           | self.request.user.profile.friends.all()).distinct()
         return form
+
+    def form_valid(self, form):
+        form.cleaned_data['members'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
+        return super(GroupEdit, self).form_valid(form)
 
 
 @login_required
