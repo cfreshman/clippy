@@ -97,6 +97,8 @@
 	flex-direction: row;
 	flex-wrap: nowrap;
 	overflow: auto;
+	align-items: center;
+	align-content: center;
 }
 
 .member-icon {

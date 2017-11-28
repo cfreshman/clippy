@@ -64,6 +64,7 @@
               </a>
             </div>
             {% endfor %}
+            {% if event.joined.all %}|{% endif %}
             {% for profile in event.joined.all %}
             <div class="member-icon">
               <a href="{% url 'user' profile.id %}">
