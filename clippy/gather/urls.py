@@ -5,7 +5,7 @@ urlpatterns = [
 	url(r'^$', views.index, name='index'),
 
 	# create
-	url(r'^g/new$', views.create_group, name='create_group'),
+	url(r'^g/new$', views.GroupCreate.as_view(), name='create_group'),
 	url(r'^e/new$', views.create_event, name='create_event'),
 
 	# view

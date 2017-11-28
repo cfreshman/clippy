@@ -6,6 +6,8 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils.http import is_safe_url
 import datetime
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 
 def get_viewer_and_context(profile):
     groups = profile.groups.all()
@@ -119,6 +121,12 @@ def create_group(request):
         context={'viewer': viewer,
                  'group_list': group_list, 'group_id': -1}
     )
+
+
+class GroupCreate(CreateView):
+    model = EventGroup
+    fields = '__all__'
+
 
 @login_required
 def create_event(request):
