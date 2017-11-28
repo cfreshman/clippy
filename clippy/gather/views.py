@@ -126,11 +126,22 @@ def create_group(request):
 class GroupCreate(CreateView):
     model = EventGroup
     fields = '__all__'
+
+    def get_form(self, form_class=None):    
+        form = super(GroupCreate, self).get_form(form_class)
+        form.fields['members'].queryset = self.request.user.profile.friends.all()
+        return form
     
     
 class GroupEdit(UpdateView):
     model = EventGroup
     fields = '__all__'
+
+    def get_form(self, form_class=None):  
+        form = super(GroupEdit, self).get_form(form_class)
+        form.fields['members'].queryset = \
+            (self.object.members.all() | self.request.user.profile.friends.all()).distinct()
+        return form
 
 
 @login_required
