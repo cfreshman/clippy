@@ -8,6 +8,7 @@
       <div class="card-body">
         <div class="card-slide">
           {% for event in upcoming %}
+          <a href="{% url 'event' event.id %}" style="color: initial; text-decoration: none">
             <div class="event card">
               <div class="card-body">
                 <h5 class="card-title">{{ event.title }}</h5>
@@ -15,6 +16,7 @@
               </div>
               <div class="card-footer">{{ event.time }}</div>
             </div>
+          </a>
           {% endfor %}
         </div>
       </div>
