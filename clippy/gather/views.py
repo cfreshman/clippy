@@ -212,15 +212,15 @@ class EventEdit(UpdateView):
 
 
 class ProfileEdit(UpdateView):
-    model = Profile
-    fields = ['friends', 'picture']
+    model = User
+    fields = '__all__'#['friends', 'picture']
 
     def get_object(self, queryset=None):
-        return self.request.user.profile
+        return self.request.user
 
     def get_form(self, form_class=None):    
         form = super(ProfileEdit, self).get_form(form_class)
-        form.fields['friends'].queryset = self.object.friends.distinct()
+        #form.fields['friends'].queryset = self.object.profile.friends.distinct()
         return form
 
 
