@@ -32,11 +32,20 @@
         {% for event in event_list %}
         {% if event.id not in hidden %}
         <div class="event card spaced">
-          {% if event.picture %}
-            <!-- <a href="{% url 'event' event.id %}"> -->
-              <img class="card-img-top" src="{{ event.picture.url }}">
-            <!-- </a> -->
-          {% endif %}
+          <a id="event{{ event.id }}" target="_blank">
+            <img class="card-img-top" 
+            {% if event.picture %}
+              src="{{ event.picture.url }}"
+            {% endif %}>
+          </a>
+          <script>
+            setTimeout(()=>{
+              $('#event{{ event.id }}')[0].href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('{{ event.location }}');
+              {% if not event.picture %}
+                $('#event{{ event.id }} img')[0].src = 'https://maps.googleapis.com/maps/api/staticmap?size=512x512&scale=2&zoom=15&maptype=roadmap&markers=size:mid%7Ccolor:red%7C' + encodeURIComponent('{{ event.location }}') + '&key=AIzaSyCpdnoQDB5HonLnKqYjJmP7fTTjQ6MO9u8';
+              {% endif %}
+            });
+          </script>
           <div class="card-body">
             <div class="card-aside">
               {% if event.id in hosting %}
@@ -91,4 +100,21 @@
       $(".page-info img").height($(".page-info img").width())
     }).resize();
   </script>
+
+ <!--  <script>
+    function initMap() {
+      var uluru = {lat: -25.363, lng: 131.044};
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: uluru
+      });
+      var marker = new google.maps.Marker({
+        position: uluru,
+        map: map
+      });
+    }
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpdnoQDB5HonLnKqYjJmP7fTTjQ6MO9u8&callback=initMap">
+  </script> -->
 {% endblock %}

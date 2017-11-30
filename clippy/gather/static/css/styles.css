@@ -132,8 +132,7 @@
 }
 
 #event-feed .card .card-img-top {
-	max-height: 10rem;
-	object-fit: cover;
+	height: 10rem;
 }
 
 #event-feed .card .card-body {
