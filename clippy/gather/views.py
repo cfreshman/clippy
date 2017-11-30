@@ -220,7 +220,7 @@ class ProfileEdit(UpdateView):
 
     def get_form(self, form_class=None):    
         form = super(ProfileEdit, self).get_form(form_class)
-        form.fields['friends'].queryset = self.object.profile.friends.distinct()
+        form.fields['friends'].queryset = self.object.friends.distinct()
         return form
 
 
