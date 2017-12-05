@@ -40,7 +40,7 @@
               {% endif %}>
             </a>
             <script>
-              setTimeout(()=>{
+              document.addEventListener("DOMContentLoaded", ()=>{
                 $('#event{{ event.id }}')[0].href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('{{ event.location }}');
                 {% if not event.picture %}
                   $('#event{{ event.id }} img')[0].src = 'https://maps.googleapis.com/maps/api/staticmap?size=512x512&scale=2&zoom=14&maptype=roadmap&markers=size:mid%7Ccolor:red%7C' + encodeURIComponent('{{ event.location }}') + '&key=AIzaSyCpdnoQDB5HonLnKqYjJmP7fTTjQ6MO9u8';
