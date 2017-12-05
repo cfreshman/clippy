@@ -3,7 +3,7 @@
 }
 
 .search-box .input-group {
-	height: 35px;
+	height: 2.2rem;
 	margin-right: .5rem;
 }
 .search-box .input-group-addon {
@@ -35,8 +35,8 @@
 }
 
 .profile-icon img {
-	width: 35px;
-	height: 35px;
+	width: 2.2rem;
+	height: 2.2rem;
 	border-radius: .25rem;
 	object-fit: cover;
 	cursor: pointer;
