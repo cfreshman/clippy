@@ -22,74 +22,98 @@
     </div>
   </aside>
 
-  <content class="col-9">
+  <content class="col-9 container">
 
     {% block slide %}{% endblock %}
 
-    <!-- Event Feed -->
-    <div id="event-feed">
-      {% if event_list %}
-        {% for event in event_list %}
-        {% if event.id not in hidden %}
-        <div class="event card spaced">
-          <a id="event{{ event.id }}" target="_blank">
-            <img class="card-img-top" 
-            {% if event.picture %}
-              src="{{ event.picture.url }}"
-            {% endif %}>
-          </a>
-          <script>
-            setTimeout(()=>{
-              $('#event{{ event.id }}')[0].href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('{{ event.location }}');
-              {% if not event.picture %}
-                $('#event{{ event.id }} img')[0].src = 'https://maps.googleapis.com/maps/api/staticmap?size=512x512&scale=2&zoom=14&maptype=roadmap&markers=size:mid%7Ccolor:red%7C' + encodeURIComponent('{{ event.location }}') + '&key=AIzaSyCpdnoQDB5HonLnKqYjJmP7fTTjQ6MO9u8';
-              {% endif %}
-            });
-          </script>
-          <div class="card-body">
-            <div class="card-aside">
-              {% if event.id in hosting %}
-                <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-dark">Edit</a>
-              {% elif event.id in joined %}
-                <a href="{% url 'event_action' event.id 'leave' %}?next={{request.path}}" class="btn btn-light">Leave</a>
-              {% else %}
-                <a href="{% url 'event_action' event.id 'join' %}?next={{request.path}}" class="btn btn-dark">Join</a>
-                {% if group_id == 0 %}
-                  <a href="{% url 'event_action' event.id 'hide' %}?next={{request.path}}" class="btn btn-light">Hide</a>
+    <div class="row">
+      <!-- Event Feed -->
+      <div id="event-feed" class="col-9">
+        {% if event_list %}
+          {% for event in event_list %}
+          {% if event.id not in hidden %}
+          <div class="event card spaced below">
+            <a id="event{{ event.id }}" target="_blank">
+              <img class="card-img-top" 
+              {% if event.picture %}
+                src="{{ event.picture.url }}"
+              {% endif %}>
+            </a>
+            <script>
+              setTimeout(()=>{
+                $('#event{{ event.id }}')[0].href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('{{ event.location }}');
+                {% if not event.picture %}
+                  $('#event{{ event.id }} img')[0].src = 'https://maps.googleapis.com/maps/api/staticmap?size=512x512&scale=2&zoom=14&maptype=roadmap&markers=size:mid%7Ccolor:red%7C' + encodeURIComponent('{{ event.location }}') + '&key=AIzaSyCpdnoQDB5HonLnKqYjJmP7fTTjQ6MO9u8';
                 {% endif %}
-              {% endif %}
+              });
+            </script>
+            <div class="card-body">
+              <div class="card-aside">
+                {% if event.id in hosting %}
+                  <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-dark">Edit</a>
+                {% elif event.id in joined %}
+                  <a href="{% url 'event_action' event.id 'leave' %}?next={{request.path}}" class="btn btn-light">Leave</a>
+                {% else %}
+                  <a href="{% url 'event_action' event.id 'join' %}?next={{request.path}}" class="btn btn-dark">Join</a>
+                  {% if group_id == 0 %}
+                    <a href="{% url 'event_action' event.id 'hide' %}?next={{request.path}}" class="btn btn-light">Hide</a>
+                  {% endif %}
+                {% endif %}
+              </div>
+              <div class="card-content">
+                <h4 class="card-title">{{ event.title }}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">{{ event.location }} • {{ event.time }}</h6>
+                <p class="card-text">{{ event.description }}</p>
+              </div>
             </div>
-            <div class="card-content">
-              <h4 class="card-title">{{ event.title }}</h4>
-              <h6 class="card-subtitle mb-2 text-muted">{{ event.location }} • {{ event.time }}</h6>
-              <p class="card-text">{{ event.description }}</p>
+            <div class="card-footer card-slide">
+              {% for profile in event.hosts.all %}
+              <div class="user-icon">
+                <a href="{% url 'user' profile.id %}">
+                  <img src="{{ profile.picture.url }}" title="{{ profile }}">
+                </a>
+              </div>
+              {% endfor %}
+              {% if event.joined.all %}|{% endif %}
+              {% for profile in event.joined.all %}
+              <div class="user-icon">
+                <a href="{% url 'user' profile.id %}">
+                  <img src="{{ profile.picture.url }}" title="{{ profile }}">
+                </a>
+              </div>
+              {% endfor %}
             </div>
           </div>
-          <div class="card-footer card-slide">
-            {% for profile in event.hosts.all %}
-            <div class="member-icon">
-              <a href="{% url 'user' profile.id %}">
-                <img src="{{ profile.picture.url }}" title="{{ profile }}">
-              </a>
-            </div>
-            {% endfor %}
-            {% if event.joined.all %}|{% endif %}
-            {% for profile in event.joined.all %}
-            <div class="member-icon">
-              <a href="{% url 'user' profile.id %}">
-                <img src="{{ profile.picture.url }}" title="{{ profile }}">
-              </a>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
+          {% endif %}
+          {% endfor %}
+        {% else %}
+          <p class="spaced">No upcoming events</p>
         {% endif %}
-        {% endfor %}
-      {% else %}
-        <p class="spaced">No upcoming events</p>
-      {% endif %}
+      </div>
+
+      <!-- Friends List -->
+      <aside class='col-3'>
+        <div id="friend-list" class="spaced below">
+          <h4>
+            {% if group_id > 0 %}
+              Members
+            {% else %}
+              Friends
+            {% endif %}
+          </h4>
+          {% for user in users %}
+          <div class="user-icon lg">
+            <a href="{% url 'user' user.id %}">
+              <img src="{{ user.picture.url }}" title="{{ user }}">
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </aside>
     </div>
   </content>
+
+  
 </div>
 {% endblock %}
 
@@ -100,21 +124,4 @@
       $(".page-info img").height($(".page-info img").width())
     }).resize();
   </script>
-
- <!--  <script>
-    function initMap() {
-      var uluru = {lat: -25.363, lng: 131.044};
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: uluru
-      });
-      var marker = new google.maps.Marker({
-        position: uluru,
-        map: map
-      });
-    }
-  </script>
-  <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpdnoQDB5HonLnKqYjJmP7fTTjQ6MO9u8&callback=initMap">
-  </script> -->
 {% endblock %}

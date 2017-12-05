@@ -10,7 +10,7 @@
 		<div class="card-body">
 			<h4 class="card-title">{{ group }}</h4>
 			<p class="card-text">{{ group.description }}</p>
-			{% if viewer in members %}
+			{% if viewer in users %}
 			<div class="page-buttons">
 				<a href="{% url 'edit_group' group.id %}" class="btn btn-outline-dark">Edit</a>
 				<a href="{% url 'group_action' group.id 'leave' %}?next={{request.path}}" class="btn btn-light">Leave</a>
@@ -27,7 +27,7 @@
 	  	<h4 class="card-header">Members</h4>
 	    <div class="card-slide">
 	    	{% for profile in members %}
-    		<div class="member-icon">
+    		<div class="user-icon lg">
     			<a href="{% url 'user' profile.id %}">
     				<img src="{{ profile.picture.url }}" title="{{ profile }}">
     			</a>
