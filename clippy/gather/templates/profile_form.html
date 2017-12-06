@@ -1,0 +1,41 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="event card spaced">
+    <h4 class="card-header">Account Settings</h4>
+    <div class="card-body">
+    <form action="{% url 'settings' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="pretty-form">
+        {% for field in form %}
+            <h5>{{ field.label }}</h5>
+            <p>
+            {% ifequal field.label 'Picture' %}
+                <img src="{{ user.profile.picture.url }}" class="img-thumbnail"><br>
+            {% endifequal %}
+            {{ field }}
+        {% endfor %}
+        <p>
+        <a href="{% url 'change_password' %}" class="btn btn-light">Change Password</a>
+        <br>
+        {% if messages %}
+        <div class="row">
+            <div class="col-sm-6">
+          <ul class="messages">
+            {% for message in messages %}
+              <div class="alert {{ message.tags }} alert-dismissable" role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  <strong>{{ message }}</strong>
+                </button>
+              </div>
+            {% endfor %}
+          </ul>
+      </div>
+      </div>
+        {% endif %}
+        </table>
+        <input type="submit" value="Save Changes" />
+    </form>
+  </div>
+</div>
+{% endblock %}

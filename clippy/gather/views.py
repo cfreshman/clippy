@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from .models import Profile, EventGroup, Event
 from django.contrib.auth.decorators import login_required
@@ -7,8 +7,8 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils.http import is_safe_url
 import datetime
+from django.contrib import messages
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
 
 def get_viewer_and_context(profile):
     groups = profile.groups.all()
@@ -33,7 +33,6 @@ def get_viewer_and_context(profile):
 
     context = {
         'viewer': profile,
-        'users': profile.friends.all(),
         'group_list': groups,
         'group_id': 0,
         'event_list': invited,
@@ -83,7 +82,6 @@ def view_user(request, id):
         'user.html',
         context={**context,
                  'profile': profile,
-                 'users': profile.friends.all(),
                  'group_id': -1,
                  'is_friend': is_friend,
                  'event_list': invited,
@@ -106,7 +104,7 @@ def view_group(request, id):
                  'group': group,
                  'group_id': int(id),
         		 'event_list': events,
-        		 'users': members,
+        		 'members': members,
                  'hidden': []}
     )
 
@@ -212,19 +210,77 @@ class EventEdit(UpdateView):
         form.cleaned_data['hosts'] |= Profile.objects.filter(id=self.request.user.profile.id).distinct()
         return super(EventEdit, self).form_valid(form)
 
+from .forms import EditProfileForm
+from django.contrib.auth.models import User
+from django.db import IntegrityError
+@login_required
+def edit_profile(request):
+    profile = request.user.profile
+    user = request.user
+    form = EditProfileForm(request.POST or None, request.FILES or None,
+                                                 initial={'first_name':user.first_name, 
+                                                          'last_name':user.last_name,
+                                                          'username':user.get_username(),
+                                                          'picture':profile.picture})
+    if request.method == 'POST':
+        if form.is_valid():
+            if (user.first_name != request.POST['first_name'] or
+                user.last_name != request.POST['last_name']):
+                user.first_name = request.POST['first_name']
+                user.last_name = request.POST['last_name']
+                messages.add_message(request, messages.SUCCESS, "Name changed to " + 
+                    user.first_name + " " + user.last_name)
+            if user.username != request.POST['username']:
+                temp = user.username
+                try:
+                    user.username = request.POST['username']
+                    user.save()
+                    messages.add_message(request, messages.SUCCESS, "Username changed to " + 
+                        user.username)
+                except IntegrityError:
+                    user.username = temp
+                    messages.add_message(request, messages.ERROR, "Invalid username.")
+            user.save()
+            if request.FILES:
+                profile.picture = request.FILES['picture']
+                profile.save()
+                messages.success(request, "Profile picture changed.")
 
-class ProfileEdit(UpdateView):
-    model = Profile
-    fields = ['friends', 'picture']
+            return HttpResponseRedirect('%s'%(reverse('settings')))
 
-    def get_object(self, queryset=None):
-        return self.request.user.profile
+    context = {
+        "form": form
+    }
+ 
+    return render(request, "profile_form.html", context)
 
-    def get_form(self, form_class=None):    
-        form = super(ProfileEdit, self).get_form(form_class)
-        form.fields['friends'].queryset = self.object.friends.distinct()
-        return form
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if not request.user.is_authenticated():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, "Something didn't match. Check requirements below:")
+            messages.info(request,
+                """Your password can't be too similar to your other personal information.<br>
+                Your password must contain at least 8 characters.<br>
+                Your password can't be a commonly used password.<br>
+                Your password can't be entirely numeric.""", extra_tags='safe')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {
+        'form': form
+    })
 
+
+@login_required
+def edit_event(request, id):
+    viewer = request.user.profile
 
 @login_required
 def user_action(request, id, action):
