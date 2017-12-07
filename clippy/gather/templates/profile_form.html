@@ -10,31 +10,32 @@
         {% for field in form %}
             <h5>{{ field.label }}</h5>
             <p>
-            {% ifequal field.label 'Picture' %}
-                <img src="{{ user.profile.picture.url }}" class="img-thumbnail"><br>
-            {% endifequal %}
-            {{ field }}
+              {% ifequal field.label 'Picture' %}
+                  <img src="{{ user.profile.picture.url }}" class="img-thumbnail"><br>
+              {% endifequal %}
+              {{ field }}
+            </p>
         {% endfor %}
-        <p>
-        <a href="{% url 'change_password' %}" class="btn btn-light">Change Password</a>
-        <br>
         {% if messages %}
         <div class="row">
-            <div class="col-sm-6">
-          <ul class="messages">
-            {% for message in messages %}
-              <div class="alert {{ message.tags }} alert-dismissable" role="alert">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>{{ message }}</strong>
-                </button>
-              </div>
-            {% endfor %}
-          </ul>
-      </div>
-      </div>
+          <div class="col-sm-6">
+            <ul class="messages">
+              {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissable" role="alert">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>{{ message }}</strong>
+                </div>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% else %}
+        <br>
         {% endif %}
         </table>
-        <input type="submit" value="Save Changes" />
+        <p><input type="submit" class="btn btn-light" value="Save Changes" /></p>
+        <hr>
+        <a href="{% url 'change_password' %}" class="btn btn-light">Change Password</a>
     </form>
   </div>
 </div>
