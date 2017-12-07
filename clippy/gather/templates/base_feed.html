@@ -32,7 +32,7 @@
         {% if event_list %}
           {% for event in event_list %}
           {% if event.id not in hidden %}
-          <div class="event card spaced below">
+          <div class="event card spaced">
             <a id="event{{ event.id }}" target="_blank">
               <img class="card-img-top" 
               {% if event.picture %}
@@ -93,7 +93,7 @@
 
       <!-- Friends List -->
       <aside class='col-3'>
-        <div id="friend-list" class="spaced below">
+        <div id="friend-list" class="spaced">
           <h4>
             {% if group_id > 0 %}
               Members
