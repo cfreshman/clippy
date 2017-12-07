@@ -33,6 +33,7 @@ def get_viewer_and_context(profile):
 
     context = {
         'viewer': profile,
+        'users': profile.friends.all(),
         'group_list': groups,
         'group_id': 0,
         'event_list': invited,
@@ -82,6 +83,7 @@ def view_user(request, id):
         'user.html',
         context={**context,
                  'profile': profile,
+                 'users': profile.friends.all(),
                  'group_id': -1,
                  'is_friend': is_friend,
                  'event_list': invited,
@@ -104,7 +106,7 @@ def view_group(request, id):
                  'group': group,
                  'group_id': int(id),
         		 'event_list': events,
-        		 'members': members,
+        		 'users': members,
                  'hidden': []}
     )
 
